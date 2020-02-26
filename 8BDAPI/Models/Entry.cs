@@ -13,9 +13,23 @@ namespace _8BDAPI.Models
         public int author_id { get; set; }
         public int subject_id { get; set; }
         public string entry { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime createDate { get; set; }
 
-   
+        /*
+         
+         CREATE TABLE entry(
+         id   INT              NOT NULL,
+         author_id   INT              NOT NULL,
+         subject_id   INT              NOT NULL,
+         entry TEXT     NOT NULL,
+         createDate  datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,       
+         PRIMARY KEY (id)
+           );
+         
+         
+         */
+
+
 
     }
 }
