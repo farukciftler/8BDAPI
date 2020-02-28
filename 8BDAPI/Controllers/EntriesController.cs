@@ -94,8 +94,9 @@ namespace _8BDAPI.Controllers
             }*/
 
             var list = _context.Subject
-                
+                .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
                 .ToList();
+            
 
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
