@@ -92,7 +92,11 @@ namespace _8BDAPI.Controllers
                 var s = new Subject { author_id = entry.author_id, subject = entry.subject, isActive = 0, BSHIU = 0 };
                     
             }*/
-            
+
+            var list = _context.Subject
+                
+                .ToList();
+
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
 
