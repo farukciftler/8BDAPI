@@ -99,7 +99,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[subject](
-	[id] [int] NOT NULL,
+	[id] [int] ,
 	[author_id] [int] NOT NULL,
 	[subject] [text] NOT NULL,
 	[isActive] [int] NOT NULL,

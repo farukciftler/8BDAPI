@@ -15,7 +15,7 @@ namespace _8BDAPI.Controllers
     public class EntriesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
-        private readonly Subject _subject;
+        
 
         public EntriesController(_8BDAPIContext context)
         {
@@ -92,11 +92,29 @@ namespace _8BDAPI.Controllers
                 var s = new Subject { author_id = entry.author_id, subject = entry.subject, isActive = 0, BSHIU = 0 };
                     
             }*/
-
+            Subject newsubject = new Subject();
             var list = _context.Subject
-                .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
-                .ToList();
+               .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
+               .FirstOrDefault();
             
+         
+            if (list == null)
+            {
+
+                newsubject.author_id = entry.author_id;
+                newsubject.subject = entry.subject;
+                newsubject.isActive = 1;
+                newsubject.BSHIU = "00000";
+                newsubject.createDate = DateTime.Now;
+                newsubject.updateDate = DateTime.Now;
+                _context.Subject.Add(newsubject);
+                await _context.SaveChangesAsync();
+                
+            }
+            var list2 = _context.Subject
+               .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
+               .FirstOrDefault();
+            entry.subject_id = list2.id;
 
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
