@@ -15,12 +15,16 @@ namespace _8BDAPI.Controllers
     public class EntriesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
+        private readonly Subject _subject;
 
         public EntriesController(_8BDAPIContext context)
         {
             _context = context;
         }
+     
 
+
+        
         // GET: api/Entries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
@@ -80,6 +84,15 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
+
+            /*
+            var isExist =  _context.Subject.Where(b => b.subject == entry.subject).First();
+            if (isExist == null)
+            {
+                var s = new Subject { author_id = entry.author_id, subject = entry.subject, isActive = 0, BSHIU = 0 };
+                    
+            }*/
+            
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
 

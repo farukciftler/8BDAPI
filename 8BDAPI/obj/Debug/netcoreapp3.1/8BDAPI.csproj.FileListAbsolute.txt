@@ -141,16 +141,6 @@ D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Works
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\8BDAPI.Views.dll
-D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\8BDAPI.Views.pdb
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.RazorAssemblyInfo.cache
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.RazorAssemblyInfo.cs
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.TagHelpers.input.cache
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.TagHelpers.output.cache
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.RazorCoreGenerate.cache
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\Razor\Views\Entry.cshtml.g.cs
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.RazorTargetAssemblyInfo.cs
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.Views.pdb
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
