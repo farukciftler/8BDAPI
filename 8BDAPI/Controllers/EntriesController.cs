@@ -127,17 +127,29 @@ namespace _8BDAPI.Controllers
             {
                 return NotFound();
             }
-
             _context.Entry.Remove(entry);
-            
+            await _context.SaveChangesAsync();
             //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek HENÜZ OLMADI
-            var list = _context.Entry.Where(s => (s.subjectId == entry.subjectId))
+            if (_context.Entry.Where(s => (s.subjectId == entry.subjectId))
+            .OrderByDescending(e => e.createDate).FirstOrDefault() != null)
+            {
+                var list = _context.Entry.Where(s => (s.subjectId == entry.subjectId))
             .OrderByDescending(e => e.createDate).FirstOrDefault();
-            var list2 = _context.Subject
-            .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subjectId)='{entry.subjectId}'")
-            .FirstOrDefault();
-            list2.updateDate = list.createDate;
-            _context.Subject.Update(list2);
+                var list2 = _context.Subject
+           .FromSqlRaw($"SELECT * FROM subject WHERE id={entry.subjectId}")
+           .FirstOrDefault();
+                list2.updateDate = list.createDate;
+
+                _context.Subject.Update(list2);
+            }
+            else
+            {
+                var subject = await _context.Subject.FindAsync(entry.subjectId);
+                _context.Subject.Remove(subject);
+                
+            }
+            
+           
             await _context.SaveChangesAsync();
 
  
