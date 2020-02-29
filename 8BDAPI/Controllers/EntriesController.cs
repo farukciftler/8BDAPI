@@ -85,13 +85,8 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
 
-            /*
-            var isExist =  _context.Subject.Where(b => b.subject == entry.subject).First();
-            if (isExist == null)
-            {
-                var s = new Subject { author_id = entry.author_id, subject = entry.subject, isActive = 0, BSHIU = 0 };
-                    
-            }*/
+
+           
             Subject newsubject = new Subject();
             var list = _context.Subject
                .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
@@ -100,8 +95,7 @@ namespace _8BDAPI.Controllers
          
             if (list == null)
             {
-
-                newsubject.author_id = entry.author_id;
+                newsubject.authorId = entry.authorId;
                 newsubject.subject = entry.subject;
                 newsubject.isActive = 1;
                 newsubject.BSHIU = "00000";
@@ -109,16 +103,18 @@ namespace _8BDAPI.Controllers
                 newsubject.updateDate = DateTime.Now;
                 _context.Subject.Add(newsubject);
                 await _context.SaveChangesAsync();
-                
             }
             var list2 = _context.Subject
                .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
                .FirstOrDefault();
-            entry.subject_id = list2.id;
 
+            //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
+            list2.updateDate = DateTime.Now;
+            _context.Subject.Update(list2);
+
+            entry.subjectId = list2.id;
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetEntry", new { id = entry.id }, entry);
         }
 
@@ -133,7 +129,21 @@ namespace _8BDAPI.Controllers
             }
 
             _context.Entry.Remove(entry);
+            
+            //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek HENÜZ OLMADI
+            var list = _context.Entry.Where(s => (s.subjectId == entry.subjectId))
+            .OrderByDescending(e => e.createDate).FirstOrDefault();
+            var list2 = _context.Subject
+            .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subjectId)='{entry.subjectId}'")
+            .FirstOrDefault();
+            list2.updateDate = list.createDate;
+            _context.Subject.Update(list2);
             await _context.SaveChangesAsync();
+
+ 
+       
+           
+
 
             return entry;
         }

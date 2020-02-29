@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [8BDAPI]    Script Date: 2/28/2020 2:32:05 PM ******/
+/****** Object:  Database [8BDAPI]    Script Date: 2/28/2020 9:21:42 PM ******/
 CREATE DATABASE [8BDAPI]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,48 +75,53 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 2/28/2020 2:32:05 PM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 2/28/2020 9:21:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[entry](
-	[id] [int] NOT NULL,
-	[author_id] [int] NOT NULL,
-	[subject_id] [int] NOT NULL,
-	[subject] [varchar](55) NOT NULL,
-	[entry] [text] NOT NULL,
-	[createDate] [datetime] NOT NULL,
-PRIMARY KEY CLUSTERED 
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[authorId] [int] NULL,
+	[subjectId] [int] NULL,
+	[subject] [varchar](55) NULL,
+	[entry] [text] NULL,
+	[createDate] [datetime] NULL,
+	[lastUpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_entry] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 2/28/2020 2:32:06 PM ******/
+/****** Object:  Table [dbo].[subject]    Script Date: 2/28/2020 9:21:42 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[subject](
-	[id] [int] ,
-	[author_id] [int] NOT NULL,
-	[subject] [text] NOT NULL,
-	[isActive] [int] NOT NULL,
-	[createDate] [datetime] NOT NULL,
-	[updateDate] [datetime] NOT NULL,
-	[BSHIU] [int] NOT NULL,
-PRIMARY KEY CLUSTERED 
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[authorId] [int] NULL,
+	[subject] [varchar](55) NULL,
+	[isActive] [int] NULL,
+	[createDate] [datetime] NULL,
+	[updateDate] [datetime] NULL,
+	[BSHIU] [varchar](5) NULL,
+ CONSTRAINT [PK_subjecgt] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[entry] ADD  DEFAULT (getdate()) FOR [createDate]
+ALTER TABLE [dbo].[entry] ADD  CONSTRAINT [DF_entry_createDate]  DEFAULT (getdate()) FOR [createDate]
 GO
-ALTER TABLE [dbo].[subject] ADD  DEFAULT (getdate()) FOR [createDate]
+ALTER TABLE [dbo].[entry] ADD  CONSTRAINT [DF_entry_lastUpdateDate]  DEFAULT (getdate()) FOR [lastUpdateDate]
 GO
-ALTER TABLE [dbo].[subject] ADD  DEFAULT (getdate()) FOR [updateDate]
+ALTER TABLE [dbo].[subject] ADD  CONSTRAINT [DF_subjecgt_createDate]  DEFAULT (getdate()) FOR [createDate]
+GO
+ALTER TABLE [dbo].[subject] ADD  CONSTRAINT [DF_subjecgt_updateDate]  DEFAULT (getdate()) FOR [updateDate]
+GO
+ALTER TABLE [dbo].[subject] ADD  CONSTRAINT [DF_subjecgt_BSHIU]  DEFAULT ((0)) FOR [BSHIU]
 GO
 USE [master]
 GO

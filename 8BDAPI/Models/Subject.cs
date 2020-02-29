@@ -8,7 +8,7 @@ namespace _8BDAPI.Models
     public class Subject
     {
         public int id { get; set; }
-        public int author_id { get; set; }
+        public int authorId { get; set; }
         public string subject { get; set; }
         public int isActive { get; set; }
         public DateTime createDate { get; set; }

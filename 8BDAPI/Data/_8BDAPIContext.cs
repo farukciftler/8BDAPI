@@ -14,7 +14,7 @@ namespace _8BDAPI.Data
         {
         }
 
-        public DbSet<_8BDAPI.Models.Entry> Entry { get; set; }
+        public new DbSet<_8BDAPI.Models.Entry> Entry { get; set; }
 
         public DbSet<_8BDAPI.Models.Subject> Subject { get; set; }
     }
