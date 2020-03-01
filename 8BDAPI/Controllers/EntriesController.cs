@@ -111,7 +111,8 @@ namespace _8BDAPI.Controllers
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
             list2.updateDate = DateTime.Now;
             _context.Subject.Update(list2);
-
+            entry.createDate = DateTime.Now;
+            entry.lastUpdateDate = DateTime.Now;
             entry.subjectId = list2.id;
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
@@ -129,7 +130,7 @@ namespace _8BDAPI.Controllers
             }
             _context.Entry.Remove(entry);
             await _context.SaveChangesAsync();
-            //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek HENÜZ OLMADI
+            //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek 
             if (_context.Entry.Where(s => (s.subjectId == entry.subjectId))
             .OrderByDescending(e => e.createDate).FirstOrDefault() != null)
             {
