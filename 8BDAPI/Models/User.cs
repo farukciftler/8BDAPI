@@ -15,7 +15,7 @@ namespace _8BDAPI.Models
         public string email { get; set; }
         public int userLevel { get; set; }
         public int isApproved { get; set; }
-        public bool isActive { get; set; }
+        public int isActive { get; set; }
         public string registerIp { get; set; }
         public DateTime registerDate { get; set; }
         public DateTime lastLoginDate { get; set; }
