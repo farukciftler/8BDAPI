@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
+using _8BDAPI.Helpers;
 
 namespace _8BDAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -20,6 +22,7 @@ namespace _8BDAPI.Controllers
         {
             _context = context;
         }
+      
 
         // GET: api/Users
         [HttpGet]
@@ -80,6 +83,9 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            Helpers.StringHelper helper = new StringHelper();
+
+            user.password = helper.CalculateMD5Hash(user.password);
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
