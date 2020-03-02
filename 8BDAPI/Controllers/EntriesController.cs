@@ -124,6 +124,16 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<Entry>> DeleteEntry(int id)
         {
             var entry = await _context.Entry.FindAsync(id);
+            GarbageEntry garbage = new GarbageEntry();
+            garbage.entryId = entry.id;
+            garbage.authorId = entry.authorId;
+            garbage.subjectId = entry.subjectId;
+            garbage.subject = entry.subject;
+            garbage.entry = entry.entry;
+            garbage.createDate = entry.createDate;
+            garbage.lastUpdateDate = entry.lastUpdateDate;
+            garbage.deletedDate = DateTime.Now;
+            _context.GarbageEntry.Add(garbage);
             if (entry == null)
             {
                 return NotFound();
