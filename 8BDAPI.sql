@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [8BDAPI]    Script Date: 2/28/2020 9:21:42 PM ******/
+/****** Object:  Database [8BDAPI]    Script Date: 3/2/2020 10:09:31 AM ******/
 CREATE DATABASE [8BDAPI]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,7 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 2/28/2020 9:21:42 PM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 3/2/2020 10:09:31 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,30 @@ CREATE TABLE [dbo].[entry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 2/28/2020 9:21:42 PM ******/
+/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/2/2020 10:09:31 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[garbageentry](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[entryId] [int] NULL,
+	[authorId] [int] NULL,
+	[subjectId] [int] NULL,
+	[subject] [varchar](55) NULL,
+	[entry] [text] NULL,
+	[createDate] [datetime] NULL,
+	[lastUpdateDate] [datetime] NULL,
+	[deletedDate] [datetime] NULL,
+	[deletedFor] [text] NULL,
+	[deletedById] [int] NULL,
+ CONSTRAINT [PK_garbageentry] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[subject]    Script Date: 3/2/2020 10:09:31 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -116,6 +139,8 @@ GO
 ALTER TABLE [dbo].[entry] ADD  CONSTRAINT [DF_entry_createDate]  DEFAULT (getdate()) FOR [createDate]
 GO
 ALTER TABLE [dbo].[entry] ADD  CONSTRAINT [DF_entry_lastUpdateDate]  DEFAULT (getdate()) FOR [lastUpdateDate]
+GO
+ALTER TABLE [dbo].[garbageentry] ADD  CONSTRAINT [DF_garbageentry_deletedDate]  DEFAULT (getdate()) FOR [deletedDate]
 GO
 ALTER TABLE [dbo].[subject] ADD  CONSTRAINT [DF_subjecgt_createDate]  DEFAULT (getdate()) FOR [createDate]
 GO

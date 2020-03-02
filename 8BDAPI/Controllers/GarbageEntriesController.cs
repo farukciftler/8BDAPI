@@ -12,49 +12,48 @@ namespace _8BDAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectsController : ControllerBase
+    public class GarbageEntriesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
 
-        public SubjectsController(_8BDAPIContext context)
+        public GarbageEntriesController(_8BDAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Subjects
+        // GET: api/GarbageEntries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
+        public async Task<ActionResult<IEnumerable<GarbageEntry>>> GetGarbageEntry()
         {
-            return await _context.Subject.ToListAsync();
+            return await _context.GarbageEntry.ToListAsync();
         }
 
-        // GET: api/Subjects/5
+        // GET: api/GarbageEntries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Subject>> GetSubject(int id)
+        public async Task<ActionResult<GarbageEntry>> GetGarbageEntry(int id)
         {
-            var subject = await _context.Subject.FindAsync(id);
+            var garbageEntry = await _context.GarbageEntry.FindAsync(id);
 
-            if (subject == null)
+            if (garbageEntry == null)
             {
                 return NotFound();
             }
 
-            return subject;
+            return garbageEntry;
         }
 
-        // PUT: api/Subjects/5
+        // PUT: api/GarbageEntries/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubject(int id, Subject subject)
+        public async Task<IActionResult> PutGarbageEntry(int id, GarbageEntry garbageEntry)
         {
-            if (id != subject.id)
+            if (id != garbageEntry.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(subject).State = EntityState.Modified;
-            
+            _context.Entry(garbageEntry).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +61,7 @@ namespace _8BDAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SubjectExists(id))
+                if (!GarbageEntryExists(id))
                 {
                     return NotFound();
                 }
@@ -75,37 +74,38 @@ namespace _8BDAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Subjects
+        // POST: api/GarbageEntries
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Subject>> PostSubject(Subject subject)
+        public async Task<ActionResult<GarbageEntry>> PostGarbageEntry(GarbageEntry garbageEntry)
         {
-            _context.Subject.Add(subject);
+            garbageEntry.deletedDate = DateTime.Now;
+            _context.GarbageEntry.Add(garbageEntry);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSubject", new { id = subject.id }, subject);
+            return CreatedAtAction("GetGarbageEntry", new { id = garbageEntry.id }, garbageEntry);
         }
 
-        // DELETE: api/Subjects/5
+        // DELETE: api/GarbageEntries/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Subject>> DeleteSubject(int id)
+        public async Task<ActionResult<GarbageEntry>> DeleteGarbageEntry(int id)
         {
-            var subject = await _context.Subject.FindAsync(id);
-            if (subject == null)
+            var garbageEntry = await _context.GarbageEntry.FindAsync(id);
+            if (garbageEntry == null)
             {
                 return NotFound();
             }
 
-            _context.Subject.Remove(subject);
+            _context.GarbageEntry.Remove(garbageEntry);
             await _context.SaveChangesAsync();
 
-            return subject;
+            return garbageEntry;
         }
 
-        private bool SubjectExists(int id)
+        private bool GarbageEntryExists(int id)
         {
-            return _context.Subject.Any(e => e.id == id);
+            return _context.GarbageEntry.Any(e => e.id == id);
         }
     }
 }

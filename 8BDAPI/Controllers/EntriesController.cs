@@ -130,7 +130,7 @@ namespace _8BDAPI.Controllers
             }
             _context.Entry.Remove(entry);
             await _context.SaveChangesAsync();
-            //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek 
+            //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek yapıldı
             if (_context.Entry.Where(s => (s.subjectId == entry.subjectId))
             .OrderByDescending(e => e.createDate).FirstOrDefault() != null)
             {
@@ -140,7 +140,6 @@ namespace _8BDAPI.Controllers
            .FromSqlRaw($"SELECT * FROM subject WHERE id={entry.subjectId}")
            .FirstOrDefault();
                 list2.updateDate = list.createDate;
-
                 _context.Subject.Update(list2);
             }
             else
