@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [8BDAPI]    Script Date: 3/2/2020 10:09:31 AM ******/
+/****** Object:  Database [8BDAPI]    Script Date: 3/2/2020 2:23:59 PM ******/
 CREATE DATABASE [8BDAPI]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,7 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 3/2/2020 10:09:31 AM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 3/2/2020 2:23:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[entry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/2/2020 10:09:31 AM ******/
+/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/2/2020 2:23:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[garbageentry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 3/2/2020 10:09:31 AM ******/
+/****** Object:  Table [dbo].[subject]    Script Date: 3/2/2020 2:23:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -131,6 +131,24 @@ CREATE TABLE [dbo].[subject](
 	[updateDate] [datetime] NULL,
 	[BSHIU] [varchar](5) NULL,
  CONSTRAINT [PK_subjecgt] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[vote]    Script Date: 3/2/2020 2:23:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[vote](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[authorId] [int] NULL,
+	[voterId] [int] NULL,
+	[entryId] [int] NULL,
+	[type] [int] NULL,
+	[voteDate] [datetime] NULL,
+ CONSTRAINT [PK_vote] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

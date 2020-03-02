@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace _8BDAPI.Models
         public int id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+        [EmailAddress]
         public string email { get; set; }
         public int userLevel { get; set; }
         public int isApproved { get; set; }
@@ -17,5 +19,6 @@ namespace _8BDAPI.Models
         public string registerIp { get; set; }
         public DateTime registerDate { get; set; }
         public DateTime lastLoginDate { get; set; }
+
     }
 }
