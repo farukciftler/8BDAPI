@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _8BDAPI.Controllers
 {
@@ -24,7 +25,7 @@ namespace _8BDAPI.Controllers
      
 
 
-        
+       [Authorize]//authorize eklendi
         // GET: api/Entries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
