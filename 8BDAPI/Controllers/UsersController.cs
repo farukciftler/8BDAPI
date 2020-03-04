@@ -17,10 +17,11 @@ namespace _8BDAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
-
-        public UsersController(_8BDAPIContext context)
+        private readonly _8BDAPI.Helpers.StringHelper _helper;
+        public UsersController(_8BDAPIContext context, StringHelper helper)
         {
             _context = context;
+            _helper = helper;
         }
       
 
@@ -83,9 +84,9 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            Helpers.StringHelper helper = new StringHelper();
+        
 
-            user.password = helper.CalculateMD5Hash(user.password);
+            user.password = _helper.CalculateMD5Hash(user.password);
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 

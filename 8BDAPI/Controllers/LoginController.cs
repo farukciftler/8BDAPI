@@ -5,13 +5,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-
+using _8BDAPI.Helpers;
 namespace _8BDAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -19,17 +20,24 @@ namespace _8BDAPI.Controllers
     public class LoginController : ControllerBase
     {
         private IConfiguration _config;
+        private readonly _8BDAPIContext _context;
+        
 
-        public LoginController(IConfiguration config)
+
+
+        public LoginController(IConfiguration config, _8BDAPIContext context)
         {
             _config = config;
-        }
+            _context = context;
+           
+    }
 
         public IActionResult Login(string username, string password)
         {
             User login = new User();
             login.username = username;
             login.password = password;
+
             IActionResult response = Unauthorized();
 
             var user = AuthenticateUser(login);
@@ -44,22 +52,14 @@ namespace _8BDAPI.Controllers
 
         private User AuthenticateUser(User login)
         {
+            StringHelper _helper = new StringHelper();
+            var userinfos = _context.User.Where(s => (s.username == login.username))
+            .FirstOrDefault();
+
             User user = null;
-            if (login.username == "asdsaasd" && login.password == "dsaadsdas")
+            if (login.username == userinfos.username && _helper.CalculateMD5Hash(login.password) == userinfos.password)
             {
-                user = new User
-                {
-                    id = 99,
-                    username = "loquat",
-                    password = "asdasd",
-                    email = "loquat@reddoc.net",
-                    userLevel = 6,
-                    isApproved = 1,
-                    isActive = 1,
-                    registerIp = "0.0.0.0",
-                    registerDate = DateTime.Now,
-                    lastLoginDate = DateTime.Now
-                };
+                user = userinfos;
             }
             return user;
         }
