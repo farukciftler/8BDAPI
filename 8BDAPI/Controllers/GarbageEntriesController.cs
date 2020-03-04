@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _8BDAPI.Controllers
 {
@@ -22,6 +23,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/GarbageEntries
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GarbageEntry>>> GetGarbageEntry()
         {
@@ -29,6 +31,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/GarbageEntries/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<GarbageEntry>> GetGarbageEntry(int id)
         {
@@ -45,6 +48,7 @@ namespace _8BDAPI.Controllers
         // PUT: api/GarbageEntries/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGarbageEntry(int id, GarbageEntry garbageEntry)
         {
@@ -77,6 +81,7 @@ namespace _8BDAPI.Controllers
         // POST: api/GarbageEntries
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<GarbageEntry>> PostGarbageEntry(GarbageEntry garbageEntry)
         {
@@ -88,6 +93,7 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/GarbageEntries/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<GarbageEntry>> DeleteGarbageEntry(int id)
         {

@@ -34,6 +34,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Entries/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {
@@ -50,6 +51,7 @@ namespace _8BDAPI.Controllers
         // PUT: api/Entries/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEntry(int id, Entry entry)
         {
@@ -82,6 +84,7 @@ namespace _8BDAPI.Controllers
         // POST: api/Entries
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
@@ -121,6 +124,7 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/Entries/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Entry>> DeleteEntry(int id)
         {
