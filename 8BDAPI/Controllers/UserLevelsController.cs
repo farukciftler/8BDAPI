@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using _8BDAPI.Helpers;
 namespace _8BDAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -16,17 +16,18 @@ namespace _8BDAPI.Controllers
     public class UserLevelsController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
-
         public UserLevelsController(_8BDAPIContext context)
         {
             _context = context;
+            
         }
-
+  
         // GET: api/UserLevels
         [Authorize(Roles ="developer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserLevel>>> GetUserLevel()
         {
+            
             return await _context.UserLevel.ToListAsync();
         }
 
@@ -35,6 +36,9 @@ namespace _8BDAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserLevel>> GetUserLevel(int id)
         {
+        
+
+           
             var userLevel = await _context.UserLevel.FindAsync(id);
 
             if (userLevel == null)

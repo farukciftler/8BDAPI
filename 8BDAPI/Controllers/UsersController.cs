@@ -9,6 +9,7 @@ using _8BDAPI.Data;
 using _8BDAPI.Models;
 using _8BDAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace _8BDAPI.Controllers
 {
@@ -18,27 +19,33 @@ namespace _8BDAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
-       
-        public UsersController(_8BDAPIContext context)
+        private readonly UserLevelHelper _usr;
+        private readonly AuthHelper _auth;
+        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth)
         {
             _context = context;
-            
+            _usr = usr;
+            _auth = auth;
         }
 
-
+            
         // GET: api/Users
-        
+        [Authorize(Roles = "developer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
+            
+            
+
             return await _context.User.ToListAsync();
         }
 
         // GET: api/Users/5
-        [Authorize(Roles ="developer")]
+        [Authorize(Roles = "developer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
+           
             var user = await _context.User.FindAsync(id);
 
             if (user == null)

@@ -23,6 +23,7 @@ namespace _8BDAPI.Helpers
                 sb.Append(hash[i].ToString("X2"));
             }
             return sb.ToString().ToLower();
+            
         }
     }
 }

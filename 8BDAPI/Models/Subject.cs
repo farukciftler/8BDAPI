@@ -13,6 +13,6 @@ namespace _8BDAPI.Models
         public int isActive { get; set; }
         public DateTime createDate { get; set; }
         public DateTime updateDate { get; set; }
-        public string BSHIU { get; set; } //BOLD STEADY HIDE ITALIC UNDERLINE
+        public string BSHIU { get; set; } //BOLD STEADY HIDE ITALIC UNDERLINED
     }
 }

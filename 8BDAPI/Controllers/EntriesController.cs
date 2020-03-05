@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using _8BDAPI.Helpers;
+using System.Security.Claims;
 
 namespace _8BDAPI.Controllers
 {
@@ -16,11 +18,14 @@ namespace _8BDAPI.Controllers
     public class EntriesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
+        private readonly AuthHelper _auth;
+
         
 
-        public EntriesController(_8BDAPIContext context)
+        public EntriesController(_8BDAPIContext context, AuthHelper auth)
         {
             _context = context;
+            _auth = auth;
         }
      
 
@@ -30,6 +35,7 @@ namespace _8BDAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
         {
+            
             return await _context.Entry.ToListAsync();
         }
 
@@ -126,10 +132,10 @@ namespace _8BDAPI.Controllers
         // DELETE: api/Entries/5
         [Authorize(Roles ="developer")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Entry>> DeleteEntry(int id)
+        public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason)
         {
             var entry = await _context.Entry.FindAsync(id);
-
+            var b = _auth.UserDataByUsername(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             //deleted entries to garbage
             GarbageEntry garbage = new GarbageEntry();
             garbage.entryId = entry.id;
@@ -140,6 +146,10 @@ namespace _8BDAPI.Controllers
             garbage.createDate = entry.createDate;
             garbage.lastUpdateDate = entry.lastUpdateDate;
             garbage.deletedDate = DateTime.Now;
+            garbage.deletedById = b.id;
+            
+            
+          
             _context.GarbageEntry.Add(garbage);
 
             if (entry == null)

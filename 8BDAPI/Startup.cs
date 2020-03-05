@@ -15,7 +15,7 @@ using _8BDAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using _8BDAPI.Helpers;
 
 namespace _8BDAPI
 {
@@ -54,11 +54,12 @@ namespace _8BDAPI
                     };
                 });
             services.AddMvc();
-
             services.AddDbContext<_8BDAPIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
+            services.AddScoped<UserLevelHelper>();
+            services.AddScoped<AuthHelper>();
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

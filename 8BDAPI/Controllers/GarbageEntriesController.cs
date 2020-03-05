@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using _8BDAPI.Helpers;
+using System.Security.Claims;
 
 namespace _8BDAPI.Controllers
 {
@@ -16,10 +18,12 @@ namespace _8BDAPI.Controllers
     public class GarbageEntriesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
+        private readonly AuthHelper _auth;
 
-        public GarbageEntriesController(_8BDAPIContext context)
+        public GarbageEntriesController(_8BDAPIContext context, AuthHelper auth)
         {
             _context = context;
+            _auth = auth;
         }
 
         // GET: api/GarbageEntries
@@ -85,7 +89,7 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<GarbageEntry>> PostGarbageEntry(GarbageEntry garbageEntry)
         {
-            garbageEntry.deletedDate = DateTime.Now;
+            
             _context.GarbageEntry.Add(garbageEntry);
             await _context.SaveChangesAsync();
 
