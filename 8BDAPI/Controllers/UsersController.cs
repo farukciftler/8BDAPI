@@ -18,16 +18,16 @@ namespace _8BDAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
-        private readonly _8BDAPI.Helpers.StringHelper _helper;
-        public UsersController(_8BDAPIContext context, StringHelper helper)
+       
+        public UsersController(_8BDAPIContext context)
         {
             _context = context;
-            _helper = helper;
+            
         }
 
 
         // GET: api/Users
-        [Authorize]
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -85,12 +85,12 @@ namespace _8BDAPI.Controllers
         // POST: api/Users
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
+        
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-        
 
+            StringHelper _helper = new StringHelper();
             user.password = _helper.CalculateMD5Hash(user.password);
             _context.User.Add(user);
             await _context.SaveChangesAsync();
@@ -99,7 +99,7 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/Users/5
-        [Authorize]
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
