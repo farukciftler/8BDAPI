@@ -25,7 +25,7 @@ namespace _8BDAPI.Controllers
      
 
 
-       [Authorize]//authorize eklendi
+       [Authorize(Roles ="developer")]//authorize eklendi
         // GET: api/Entries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
@@ -34,7 +34,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Entries/5
-        [Authorize]
+        [Authorize(Roles = "monark")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {

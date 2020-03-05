@@ -65,22 +65,27 @@ namespace _8BDAPI.Controllers
         }
         private string GenerateJSONWebToken(User userinfo)
         {
+            var user = _context.User.Where(s => (s.username == userinfo.username)).FirstOrDefault();
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+            var userLevel = _context.UserLevel.Where(s => (s.userLevel == user.userLevel)).FirstOrDefault();
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userinfo.username),
                 new Claim(JwtRegisteredClaimNames.Email, userinfo.email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, userLevel.userLevelInfo)
             };
-
+            
+            
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
                 claims,
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
+            
+               
             
             var encodetoken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodetoken;
