@@ -90,7 +90,7 @@ namespace _8BDAPI.Controllers
             var encodetoken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodetoken;
         }
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpPost]
         public string Post()
         {
@@ -99,7 +99,7 @@ namespace _8BDAPI.Controllers
             var username = claim[0].Value;
             return "welcome to: " + username;
         }
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpGet("GetValue")]
         public ActionResult<IEnumerable<string>> Get()
         {

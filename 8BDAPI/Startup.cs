@@ -15,7 +15,7 @@ using _8BDAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models;
+
 
 namespace _8BDAPI
 {
@@ -58,21 +58,7 @@ namespace _8BDAPI
             services.AddDbContext<_8BDAPIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
 
-            services.AddSwaggerGen(setupAction =>
-            {
-                setupAction.SwaggerDoc("LibraryOpenAPISpecification",
-                new Microsoft.OpenApi.Models.OpenApiInfo()
-                {
-                    Title = "8BDAPI",
-                    Version = "1"
-                });
-                setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization"
-                   
-                });
-            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,14 +71,7 @@ namespace _8BDAPI
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(setupAction =>
-            {
-                setupAction.SwaggerEndpoint(
-                "/swagger/LibraryOpenAPISpecification/swagger.json",
-                "8BDAPI");
-            });
+           
 
             app.UseRouting();
 

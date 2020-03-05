@@ -23,7 +23,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/GarbageEntries
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GarbageEntry>>> GetGarbageEntry()
         {
@@ -31,7 +31,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/GarbageEntries/5
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<GarbageEntry>> GetGarbageEntry(int id)
         {
@@ -48,7 +48,7 @@ namespace _8BDAPI.Controllers
         // PUT: api/GarbageEntries/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGarbageEntry(int id, GarbageEntry garbageEntry)
         {
@@ -81,7 +81,7 @@ namespace _8BDAPI.Controllers
         // POST: api/GarbageEntries
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpPost]
         public async Task<ActionResult<GarbageEntry>> PostGarbageEntry(GarbageEntry garbageEntry)
         {
@@ -93,7 +93,7 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/GarbageEntries/5
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<GarbageEntry>> DeleteGarbageEntry(int id)
         {

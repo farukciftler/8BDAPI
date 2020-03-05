@@ -23,7 +23,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/UserLevels
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserLevel>>> GetUserLevel()
         {
@@ -31,7 +31,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/UserLevels/5
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<UserLevel>> GetUserLevel(int id)
         {
@@ -48,7 +48,7 @@ namespace _8BDAPI.Controllers
         // PUT: api/UserLevels/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserLevel(int id, UserLevel userLevel)
         {
@@ -81,7 +81,7 @@ namespace _8BDAPI.Controllers
         // POST: api/UserLevels
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpPost]
         public async Task<ActionResult<UserLevel>> PostUserLevel(UserLevel userLevel)
         {
@@ -92,7 +92,7 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/UserLevels/5
-        [Authorize]
+        [Authorize(Roles ="developer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserLevel>> DeleteUserLevel(int id)
         {
