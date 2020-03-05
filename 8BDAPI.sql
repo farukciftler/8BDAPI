@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [8BDAPI]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Database [8BDAPI]    Script Date: 3/5/2020 9:59:30 AM ******/
 CREATE DATABASE [8BDAPI]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,7 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 3/5/2020 9:59:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[entry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/5/2020 9:59:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[garbageentry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Table [dbo].[subject]    Script Date: 3/5/2020 9:59:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +136,7 @@ CREATE TABLE [dbo].[subject](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 3/5/2020 9:59:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,12 +149,27 @@ CREATE TABLE [dbo].[user](
 	[userLevel] [int] NULL,
 	[isApproved] [int] NULL,
 	[isActive] [int] NULL,
-	[regiterIp] [varchar](50) NULL,
+	[registerIp] [varchar](50) NULL,
 	[registerDate] [datetime] NULL,
 	[lastLoginDate] [datetime] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vote]    Script Date: 3/2/2020 2:43:03 PM ******/
+/****** Object:  Table [dbo].[userlevel]    Script Date: 3/5/2020 9:59:30 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[userlevel](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[userLevel] [int] NULL,
+	[userLevelInfo] [varchar](55) NULL,
+ CONSTRAINT [PK_userlevel] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[vote]    Script Date: 3/5/2020 9:59:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

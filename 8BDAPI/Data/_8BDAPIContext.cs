@@ -23,5 +23,7 @@ namespace _8BDAPI.Data
         public DbSet<_8BDAPI.Models.Vote> Vote { get; set; }
 
         public DbSet<_8BDAPI.Models.User> User { get; set; }
+
+        public DbSet<_8BDAPI.Models.UserLevel> UserLevel { get; set; }
     }
 }
