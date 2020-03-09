@@ -15,12 +15,6 @@ namespace _8BDAPI.Models
         public string email { get; set; }
         public int userLevel { get; set; }
         public int isApproved { get; set; }
-
-        internal static string FindFirst(string nameIdentifier)
-        {
-            throw new NotImplementedException();
-        }
-
         public int isActive { get; set; }
         public string registerIp { get; set; }
         public DateTime registerDate { get; set; }
