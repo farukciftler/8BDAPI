@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using _8BDAPI.Helpers;
-
+using AutoMapper;
 namespace _8BDAPI
 {
     public class Startup
@@ -36,6 +36,7 @@ namespace _8BDAPI
                 .AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
             });
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

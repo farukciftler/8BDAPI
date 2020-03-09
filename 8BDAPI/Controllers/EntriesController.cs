@@ -10,6 +10,7 @@ using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using _8BDAPI.Helpers;
 using System.Security.Claims;
+using AutoMapper;
 
 namespace _8BDAPI.Controllers
 {
@@ -19,13 +20,14 @@ namespace _8BDAPI.Controllers
     {
         private readonly _8BDAPIContext _context;
         private readonly AuthHelper _auth;
-
+        private readonly IMapper _mapper;
         
 
-        public EntriesController(_8BDAPIContext context, AuthHelper auth)
+        public EntriesController(_8BDAPIContext context, AuthHelper auth, IMapper mapper)
         {
             _context = context;
             _auth = auth;
+            _mapper = mapper;
         }
      
 
@@ -94,15 +96,15 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user =_context.User.Where(s => s.username == username).FirstOrDefault();
 
-
-           
             Subject newsubject = new Subject();
-            var list = _context.Subject
-               .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
-               .FirstOrDefault();
-            
-         
+            entry.authorId = user.id;
+
+            var list = _context.Subject.Where(s => s.subject == entry.subject).FirstOrDefault();
+
+
             if (list == null)
             {
                 newsubject.authorId = entry.authorId;
@@ -114,9 +116,8 @@ namespace _8BDAPI.Controllers
                 _context.Subject.Add(newsubject);
                 await _context.SaveChangesAsync();
             }
-            var list2 = _context.Subject
-               .FromSqlRaw($"SELECT * FROM subject WHERE CONVERT(VARCHAR, subject)='{entry.subject}'")
-               .FirstOrDefault();
+            var list2 = _context.Subject.Where(s => s.subject == entry.subject).FirstOrDefault();
+              
 
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
             list2.updateDate = DateTime.Now;
@@ -138,13 +139,7 @@ namespace _8BDAPI.Controllers
             var b = _auth.UserDataByUsername(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             //deleted entries to garbage
             GarbageEntry garbage = new GarbageEntry();
-            garbage.entryId = entry.id;
-            garbage.authorId = entry.authorId;
-            garbage.subjectId = entry.subjectId;
-            garbage.subject = entry.subject;
-            garbage.entry = entry.entry;
-            garbage.createDate = entry.createDate;
-            garbage.lastUpdateDate = entry.lastUpdateDate;
+            garbage = _mapper.Map<GarbageEntry>(entry);
             garbage.deletedDate = DateTime.Now;
             garbage.deletedById = b.id;
             
@@ -164,9 +159,7 @@ namespace _8BDAPI.Controllers
             {
                 var list = _context.Entry.Where(s => (s.subjectId == entry.subjectId))
             .OrderByDescending(e => e.createDate).FirstOrDefault();
-                var list2 = _context.Subject
-           .FromSqlRaw($"SELECT * FROM subject WHERE id={entry.subjectId}")
-           .FirstOrDefault();
+                var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
                 list2.updateDate = list.createDate;
                 _context.Subject.Update(list2);
             }
@@ -176,15 +169,7 @@ namespace _8BDAPI.Controllers
                 _context.Subject.Remove(subject);
                 
             }
-            
-           
             await _context.SaveChangesAsync();
-
- 
-       
-           
-
-
             return entry;
         }
 
