@@ -23,7 +23,7 @@ namespace _8BDAPI.Controllers
         }
         
         // GET: api/Subjects
-        [Authorize(Roles ="developer")]
+     
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
         {
