@@ -32,7 +32,7 @@ namespace _8BDAPI.Controllers
      
 
 
-       [Authorize(Roles ="developer")]//authorize eklendi
+       //[Authorize(Roles ="developer")]//authorize eklendi
         // GET: api/Entries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
@@ -47,6 +47,22 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {
             var entry = await _context.Entry.FindAsync(id);
+
+            if (entry == null)
+            {
+                return NotFound();
+            }
+
+            return entry;
+        }
+        // GET: api/Entries/subjectid/5
+        [HttpGet("subjectid/{subjoctoid}")]
+        
+        public async Task<ActionResult<IEnumerable<Entry>>> GetEntryBySubjectId(int subjoctoid)
+        {
+            var entry = await _context.Entry
+                   .Where(i => i.subjectId == subjoctoid)
+                   .ToListAsync();
 
             if (entry == null)
             {
@@ -107,7 +123,7 @@ namespace _8BDAPI.Controllers
 
             if (list == null)
             {
-                newsubject.authorId = entry.authorId;
+                newsubject.authorId = user.id;
                 newsubject.subject = entry.subject;
                 newsubject.isActive = 1;
                 newsubject.BSHIU = "00000";
@@ -125,6 +141,7 @@ namespace _8BDAPI.Controllers
             entry.createDate = DateTime.Now;
             entry.lastUpdateDate = DateTime.Now;
             entry.subjectId = list2.id;
+            entry.authorId = user.id;
             _context.Entry.Add(entry);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetEntry", new { id = entry.id }, entry);

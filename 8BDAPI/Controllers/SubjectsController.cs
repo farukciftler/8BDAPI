@@ -23,7 +23,7 @@ namespace _8BDAPI.Controllers
         }
         
         // GET: api/Subjects
-     
+      
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
         {
@@ -36,6 +36,19 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<Subject>> GetSubject(int id)
         {
             var subject = await _context.Subject.FindAsync(id);
+
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            return subject;
+        }
+        
+        [HttpGet("title/{subjecto}")]
+        public ActionResult<Subject> GetSubjectByName(string subjecto)
+        {
+            var subject = _context.Subject.Where(s => s.subject == subjecto).FirstOrDefault();
 
             if (subject == null)
             {
