@@ -30,7 +30,7 @@ namespace _8BDAPI.Controllers
 
             
         // GET: api/Users
-        [Authorize(Roles = "developer")]
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
@@ -99,6 +99,12 @@ namespace _8BDAPI.Controllers
 
             StringHelper _helper = new StringHelper();
             user.password = _helper.CalculateMD5Hash(user.password);
+            user.lastLoginDate = DateTime.Now;
+            user.registerDate = DateTime.Now;
+            user.userLevel = 3;
+            user.isActive = 1;
+            user.isApproved = 0;
+            user.registerIp = "0000";
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
