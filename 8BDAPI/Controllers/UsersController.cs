@@ -56,6 +56,7 @@ namespace _8BDAPI.Controllers
             return user;
         }
 
+
         // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -131,6 +132,21 @@ namespace _8BDAPI.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.id == id);
+        }
+
+        [HttpGet("userid/{id}")]
+        public async Task<ActionResult<String>> GetUsernameById(int id)
+        {
+
+            var user = await _context.User.FindAsync(id);
+            
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user.username;
         }
     }
 }
