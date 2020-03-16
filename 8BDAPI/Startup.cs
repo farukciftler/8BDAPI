@@ -17,6 +17,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using _8BDAPI.Helpers;
 using AutoMapper;
+using _8BDAPI.Services;
+
 namespace _8BDAPI
 {
     public class Startup
@@ -59,7 +61,7 @@ namespace _8BDAPI
                     options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
             services.AddScoped<UserLevelHelper>();
             services.AddScoped<AuthHelper>();
-
+            services.AddScoped<IEmailSender, EmailSender>();
 
         }
 

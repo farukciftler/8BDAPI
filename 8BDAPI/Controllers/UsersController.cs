@@ -10,6 +10,8 @@ using _8BDAPI.Models;
 using _8BDAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using _8BDAPI.Services;
+
 
 namespace _8BDAPI.Controllers
 {
@@ -21,11 +23,13 @@ namespace _8BDAPI.Controllers
         private readonly _8BDAPIContext _context;
         private readonly UserLevelHelper _usr;
         private readonly AuthHelper _auth;
-        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth)
+        private IEmailSender _emailSender;
+        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth, IEmailSender emailSender)
         {
             _context = context;
             _usr = usr;
             _auth = auth;
+            _emailSender = emailSender;
         }
 
             
@@ -108,7 +112,7 @@ namespace _8BDAPI.Controllers
             user.registerIp = "0000";
             _context.User.Add(user);
             await _context.SaveChangesAsync();
-
+            _emailSender.Send(user.email, "kayit oldunuz", "tenkyubaby");
             return CreatedAtAction("GetUser", new { id = user.id }, user);
         }
 
