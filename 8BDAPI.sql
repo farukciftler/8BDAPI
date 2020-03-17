@@ -2,8 +2,14 @@ DROP DATABASE [8BDAPI]
 GO
 USE [master]
 GO
+/****** Object:  Database [8BDAPI]    Script Date: 3/17/2020 2:27:02 PM ******/
 CREATE DATABASE [8BDAPI]
- GO
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'8BDAPI', FILENAME = N'D:\Program Files (x86)\MSSQL12.SQLEXPRESS\MSSQL\DATA\8BDAPI.mdf' , SIZE = 3264KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'8BDAPI_log', FILENAME = N'D:\Program Files (x86)\MSSQL12.SQLEXPRESS\MSSQL\DATA\8BDAPI_log.ldf' , SIZE = 832KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
 ALTER DATABASE [8BDAPI] SET COMPATIBILITY_LEVEL = 120
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -71,7 +77,7 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,7 +96,7 @@ CREATE TABLE [dbo].[entry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +119,7 @@ CREATE TABLE [dbo].[garbageentry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[subject]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +138,7 @@ CREATE TABLE [dbo].[subject](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +162,7 @@ CREATE TABLE [dbo].[user](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[userlevel]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[userlevel]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +177,7 @@ CREATE TABLE [dbo].[userlevel](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vote]    Script Date: 3/13/2020 9:43:45 AM ******/
+/****** Object:  Table [dbo].[vote]    Script Date: 3/17/2020 2:27:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -208,14 +214,4 @@ GO
 USE [master]
 GO
 ALTER DATABASE [8BDAPI] SET  READ_WRITE 
-GO
-INSERT INTO [8BDAPI].dbo.userlevel (userLevel,userLevelInfo) VALUES 
-(1,'guilty')
-,(2,'abroad')
-,(3,'newbie')
-,(4,'bot')
-,(5,'author')
-,(6,'moderator')
-,(7,'administrator')
-,(8,'developer')
 GO
