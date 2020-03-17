@@ -33,7 +33,7 @@ namespace _8BDAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration["ConnectionStrings:_8BDAPIContext"]));
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration["ConnectionStrings:_8BDAPIQueue"]));
             services.AddHangfireServer();
             services.AddCors(options => {
                 options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
@@ -78,7 +78,7 @@ namespace _8BDAPI
 
             app.UseHttpsRedirection();
 
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/jobs");
 
             app.UseRouting();
 
