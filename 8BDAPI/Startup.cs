@@ -18,7 +18,7 @@ using System.Text;
 using _8BDAPI.Helpers;
 using AutoMapper;
 using _8BDAPI.Services;
-using Hangfire;
+
 namespace _8BDAPI
 {
     public class Startup
@@ -33,8 +33,11 @@ namespace _8BDAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+<<<<<<< HEAD
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration["ConnectionStrings:_8BDAPIQueue"]));
             services.AddHangfireServer();
+=======
+>>>>>>> parent of 7b43b73... hangfire added
             services.AddCors(options => {
                 options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
                 .AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
@@ -78,7 +81,11 @@ namespace _8BDAPI
 
             app.UseHttpsRedirection();
 
+<<<<<<< HEAD
             app.UseHangfireDashboard("/jobs");
+=======
+           
+>>>>>>> parent of 7b43b73... hangfire added
 
             app.UseRouting();
 
