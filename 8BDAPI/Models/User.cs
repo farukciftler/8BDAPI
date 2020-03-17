@@ -14,6 +14,7 @@ namespace _8BDAPI.Models
         [EmailAddress]
         public string email { get; set; }
         public string activationToken { get; set; }
+        public DateTime activationTokenValidTime { get; set; }
         public int userLevel { get; set; }
         public int isApproved { get; set; }
         public int isActive { get; set; }

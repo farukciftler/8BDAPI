@@ -106,10 +106,11 @@ namespace _8BDAPI.Controllers
 
             StringHelper _helper = new StringHelper();
             user.activationToken = _stringHelper.RandomString(8);
+            user.activationTokenValidTime = DateTime.Now.AddHours(2);
             user.password = _helper.CalculateMD5Hash(user.password);
             user.lastLoginDate = DateTime.Now;
             user.registerDate = DateTime.Now;
-            user.userLevel = 3;
+            user.userLevel = 8; //now everyone developer
             user.isActive = 0;
             user.isApproved = 0;
             user.registerIp = "0000";

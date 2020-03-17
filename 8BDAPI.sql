@@ -143,6 +143,7 @@ CREATE TABLE [dbo].[user](
 	[password] [varchar](50) NULL,
 	[email] [varchar](50) NULL,
 	[activationToken] [varchar](8) NULL,
+	[activationTokenValidTime] [datetime] NULL,
 	[userLevel] [int] NULL,
 	[isApproved] [int] NULL,
 	[isActive] [int] NULL,
