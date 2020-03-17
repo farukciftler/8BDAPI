@@ -21,11 +21,10 @@ namespace _8BDAPI.Controllers
     {
         private IConfiguration _config;
         private readonly _8BDAPIContext _context;
-        
+   
 
 
-
-        public LoginController(IConfiguration config, _8BDAPIContext context)
+        public LoginController(IConfiguration config, _8BDAPIContext context, StringHelper stringHelper)
         {
             _config = config;
             _context = context;
@@ -34,6 +33,7 @@ namespace _8BDAPI.Controllers
 
         public IActionResult Login(string username, string password)
         {
+         
             User login = new User();
             login.username = username;
             login.password = password;

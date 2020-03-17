@@ -13,6 +13,7 @@ namespace _8BDAPI.Models
         public string password { get; set; }
         [EmailAddress]
         public string email { get; set; }
+        public string activationToken { get; set; }
         public int userLevel { get; set; }
         public int isApproved { get; set; }
         public int isActive { get; set; }

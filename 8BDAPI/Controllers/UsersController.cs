@@ -24,12 +24,14 @@ namespace _8BDAPI.Controllers
         private readonly UserLevelHelper _usr;
         private readonly AuthHelper _auth;
         private IEmailSender _emailSender;
-        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth, IEmailSender emailSender)
+        private StringHelper _stringHelper;
+        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth, IEmailSender emailSender, StringHelper stringHelper)
         {
             _context = context;
             _usr = usr;
             _auth = auth;
             _emailSender = emailSender;
+            _stringHelper = stringHelper;
         }
 
             
@@ -103,11 +105,12 @@ namespace _8BDAPI.Controllers
         {
 
             StringHelper _helper = new StringHelper();
+            user.activationToken = _stringHelper.RandomString(8);
             user.password = _helper.CalculateMD5Hash(user.password);
             user.lastLoginDate = DateTime.Now;
             user.registerDate = DateTime.Now;
             user.userLevel = 3;
-            user.isActive = 1;
+            user.isActive = 0;
             user.isApproved = 0;
             user.registerIp = "0000";
             _context.User.Add(user);
