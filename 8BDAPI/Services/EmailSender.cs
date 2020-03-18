@@ -41,7 +41,7 @@ namespace _8BDAPI.Services
 
             _fromAddress = configuration["Email:FromAddress"];
 
-            _fromAddressTitle = configuration["FromAddressTitle"];
+            _fromAddressTitle = configuration["Email:FromAddressTitle"];
 
             _username = configuration["Email:SmtpUsername"];
 
@@ -55,12 +55,19 @@ namespace _8BDAPI.Services
 
 
 
-        public async void Send(string toAddress, string subject, string body, bool sendAsync = true)
+        public async void Send(string toAddress, string subject, string body, bool sendAsync = true, string fromAddressTitle = null)
 
         {
 
             var mimeMessage = new MimeMessage(); // MIME : Multipurpose Internet Mail Extension
-            mimeMessage.From.Add(new MailboxAddress(_fromAddressTitle, _fromAddress));
+            if (fromAddressTitle != null)
+            {
+                mimeMessage.From.Add(new MailboxAddress(fromAddressTitle, _fromAddress));
+            }else 
+            {
+                mimeMessage.From.Add(new MailboxAddress(_fromAddressTitle, _fromAddress));
+            }
+            
 
             mimeMessage.To.Add(new MailboxAddress(toAddress));
 
