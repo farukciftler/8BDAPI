@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using _8BDAPI.Helpers.Pagination;
 namespace _8BDAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -25,9 +25,12 @@ namespace _8BDAPI.Controllers
         // GET: api/Subjects
       
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
+        public virtual IPagedList<Subject> GetSubject(int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            return await _context.Subject.ToListAsync();
+            var query = _context.Subject;
+
+            var subject = new PagedList<Subject>(query, pageIndex, pageSize);
+            return subject;
         }
 
         // GET: api/Subjects/5

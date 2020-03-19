@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using _8BDAPI.Helpers;
 using System.Security.Claims;
 using AutoMapper;
+using _8BDAPI.Helpers.Pagination;
 
 namespace _8BDAPI.Controllers
 {
@@ -35,10 +36,12 @@ namespace _8BDAPI.Controllers
        //[Authorize(Roles ="developer")]//authorize eklendi
         // GET: api/Entries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Entry>>> GetEntry()
+        public  virtual IPagedList<Entry> GetEntry(int pageIndex = 0, int pageSize = int.MaxValue)
         {
+            var query = _context.Entry;
             
-            return await _context.Entry.ToListAsync();
+            var entry = new PagedList<Entry>(query, pageIndex, pageSize);
+            return  entry;
         }
 
         // GET: api/Entries/5
