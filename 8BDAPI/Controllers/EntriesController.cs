@@ -45,7 +45,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Entries/5
-        [Authorize(Roles = "developer")]
+ 
         [HttpGet("{id}")]
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {
