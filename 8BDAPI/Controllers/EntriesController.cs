@@ -121,7 +121,7 @@ namespace _8BDAPI.Controllers
             Subject newsubject = new Subject();
             entry.authorId = user.id;
 
-            var list = _context.Subject.Where(s => s.subject == entry.subject).FirstOrDefault();
+            var list = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
 
 
             if (list == null)
@@ -135,7 +135,7 @@ namespace _8BDAPI.Controllers
                 _context.Subject.Add(newsubject);
                 await _context.SaveChangesAsync();
             }
-            var list2 = _context.Subject.Where(s => s.subject == entry.subject).FirstOrDefault();
+            var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
               
 
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi

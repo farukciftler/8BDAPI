@@ -27,9 +27,10 @@ namespace _8BDAPI.Controllers
         [HttpGet]
         public virtual IPagedList<Subject> GetSubject(int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            var query = _context.Subject;
+            var query = _context.Subject.OrderByDescending(x => x.updateDate);
 
             var subject = new PagedList<Subject>(query, pageIndex, pageSize);
+            
             return subject;
         }
 
