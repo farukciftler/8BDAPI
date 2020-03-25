@@ -117,27 +117,9 @@ namespace _8BDAPI.Controllers
         {
             string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user =_context.User.Where(s => s.username == username).FirstOrDefault();
-
-            Subject newsubject = new Subject();
             entry.authorId = user.id;
 
-            var list = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
-
-
-            if (list == null)
-            {
-                newsubject.authorId = user.id;
-                newsubject.subject = entry.subject;
-                newsubject.isActive = 1;
-                newsubject.BSHIU = "00000";
-                newsubject.createDate = DateTime.Now;
-                newsubject.updateDate = DateTime.Now;
-                _context.Subject.Add(newsubject);
-                await _context.SaveChangesAsync();
-            }
             var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
-              
-
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
             list2.updateDate = DateTime.Now;
             _context.Subject.Update(list2);

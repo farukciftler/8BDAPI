@@ -9,6 +9,8 @@ using _8BDAPI.Data;
 using _8BDAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using _8BDAPI.Helpers.Pagination;
+using System.Security.Claims;
+
 namespace _8BDAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -61,6 +63,18 @@ namespace _8BDAPI.Controllers
 
             return subject;
         }
+        [HttpGet("id/{subjecto}")]
+        public ActionResult<Subject> GetSubjectById(int subjecto)
+        {
+            var subject = _context.Subject.Where(s => s.id == subjecto).FirstOrDefault();
+
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            return subject;
+        }
 
         // PUT: api/Subjects/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -103,6 +117,13 @@ namespace _8BDAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = _context.User.Where(s => s.username == username).FirstOrDefault();
+            subject.authorId = user.id;
+            subject.isActive = 1;
+            subject.BSHIU = "00000";
+            subject.createDate = DateTime.Now;
+            subject.updateDate = DateTime.Now;
             _context.Subject.Add(subject);
             await _context.SaveChangesAsync();
 

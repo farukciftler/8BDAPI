@@ -1,8 +1,6 @@
-DROP DATABASE [8BDAPI]
-GO
 USE [master]
 GO
-/****** Object:  Database [8BDAPI]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Database [8BDAPI]    Script Date: 3/25/2020 12:02:12 PM ******/
 CREATE DATABASE [8BDAPI]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,7 +75,7 @@ ALTER DATABASE [8BDAPI] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [8BDAPI]
 GO
-/****** Object:  Table [dbo].[entry]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[entry]    Script Date: 3/25/2020 12:02:12 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,8 +84,7 @@ CREATE TABLE [dbo].[entry](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[authorId] [int] NULL,
 	[subjectId] [int] NULL,
-	[subject] [varchar](55) NULL,
-	[entry] [text] NULL,
+	[entry] [nvarchar](max) NULL,
 	[createDate] [datetime] NULL,
 	[lastUpdateDate] [datetime] NULL,
  CONSTRAINT [PK_entry] PRIMARY KEY CLUSTERED 
@@ -96,7 +93,7 @@ CREATE TABLE [dbo].[entry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[garbageentry]    Script Date: 3/25/2020 12:02:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +116,7 @@ CREATE TABLE [dbo].[garbageentry](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[subject]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[subject]    Script Date: 3/25/2020 12:02:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -127,7 +124,7 @@ GO
 CREATE TABLE [dbo].[subject](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[authorId] [int] NULL,
-	[subject] [varchar](55) NULL,
+	[subject] [nvarchar](55) NULL,
 	[isActive] [int] NULL,
 	[createDate] [datetime] NULL,
 	[updateDate] [datetime] NULL,
@@ -138,7 +135,7 @@ CREATE TABLE [dbo].[subject](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 3/25/2020 12:02:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -162,7 +159,7 @@ CREATE TABLE [dbo].[user](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[userlevel]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[userlevel]    Script Date: 3/25/2020 12:02:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,7 +174,7 @@ CREATE TABLE [dbo].[userlevel](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[vote]    Script Date: 3/17/2020 2:27:02 PM ******/
+/****** Object:  Table [dbo].[vote]    Script Date: 3/25/2020 12:02:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
