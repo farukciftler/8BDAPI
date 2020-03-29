@@ -110,7 +110,7 @@ namespace _8BDAPI.Controllers
             user.password = _helper.CalculateMD5Hash(user.password);
             user.lastLoginDate = DateTime.Now;
             user.registerDate = DateTime.Now;
-            user.userLevel = 8; //now everyone developer
+            user.userLevel = 9; //now everyone developer
             user.isActive = 0;
             user.isApproved = 0;
             user.registerIp = "0000";

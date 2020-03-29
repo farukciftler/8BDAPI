@@ -33,19 +33,21 @@ namespace _8BDAPI.Controllers
      
 
 
-       //[Authorize(Roles ="developer")]//authorize eklendi
+       //[Authorize(Roles ="developer")]//aut}orize eklendi
         // GET: api/Entries
-        [HttpGet]
-        public  virtual IPagedList<Entry> GetEntry(int pageIndex = 0, int pageSize = int.MaxValue)
+    
+        public  virtual IPagedList<Entry> Index(int subjectId = 1,int pageIndex = 0, int pageSize = 10)
         {
-            var query = _context.Entry;
-            
+            var query = _context.Entry
+                   .Where(i => i.subjectId == subjectId);
+
             var entry = new PagedList<Entry>(query, pageIndex, pageSize);
             return  entry;
         }
 
+     
         // GET: api/Entries/5
- 
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Entry>> GetEntry(int id)
         {
@@ -58,21 +60,27 @@ namespace _8BDAPI.Controllers
 
             return entry;
         }
-        // GET: api/Entries/subjectid/5
-        [HttpGet("subjectid/{subjoctoid}")]
-        
-        public async Task<ActionResult<IEnumerable<Entry>>> GetEntryBySubjectId(int subjoctoid)
+       
+        //başlıktaki tanım sayısının kaç sayfa oluşturacağı pagination için
+        [HttpGet("entrypage/{subjectId}")]
+        public int EntryPage(int subjectId)
         {
-            var entry = await _context.Entry
-                   .Where(i => i.subjectId == subjoctoid)
-                   .ToListAsync();
+            var entryPage = _context.Entry.Where(x => x.subjectId == subjectId).Count();
+            entryPage = (entryPage / 10) + 1; 
+            
 
-            if (entry == null)
-            {
-                return NotFound();
-            }
+            return entryPage;
+        }
 
-            return entry;
+        //başlıktaki tanım sayısı
+        [HttpGet("entrynumber/{subjectId}")]
+        public int EntryNumber(int subjectId)
+        {
+            var entryPage = _context.Entry.Where(x => x.subjectId == subjectId).Count();
+           
+
+
+            return entryPage;
         }
 
         // PUT: api/Entries/5
