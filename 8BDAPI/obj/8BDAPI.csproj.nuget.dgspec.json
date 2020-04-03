@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
+    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
   },
   "projects": {
-    "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
+    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "projectUniqueName": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
         "projectName": "8BDAPI",
-        "projectPath": "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
-        "packagesPath": "C:\\Users\\faruk.ciftler\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\8BDAPI\\8BDAPI\\obj\\",
+        "projectPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\faruk.ciftler\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -108,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
