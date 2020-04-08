@@ -459,8 +459,6 @@ C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\runtimes
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.csprojAssemblyReference.cache
-C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.csproj.CoreCompileInputs.cache
-C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.AssemblyInfoInputs.cache
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.AssemblyInfo.cs
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.RazorTargetAssemblyInfo.cache
@@ -471,3 +469,5 @@ C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.d
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.pdb
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.genruntimeconfig.cache
 D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.csproj.CoreCompileInputs.cache
+C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache

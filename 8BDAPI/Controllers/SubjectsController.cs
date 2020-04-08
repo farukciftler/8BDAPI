@@ -79,14 +79,12 @@ namespace _8BDAPI.Controllers
         // PUT: api/Subjects/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize(Roles = "developer")]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSubject(int id, Subject subject)
+        //[Authorize(Roles = "developer")]
+        [HttpGet("edit/{id}/{newsubject}")]
+        public async Task<ActionResult<Subject>> edit(int id, string newsubject)
         {
-            if (id != subject.id)
-            {
-                return BadRequest();
-            }
+            var subject = _context.Subject.Where(s => s.id == id).FirstOrDefault();
+            subject.subject = newsubject;
 
             _context.Entry(subject).State = EntityState.Modified;
             
@@ -107,7 +105,7 @@ namespace _8BDAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return subject;
         }
 
         // POST: api/Subjects
@@ -131,8 +129,8 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/Subjects/5
-        [Authorize(Roles = "developer")]
-        [HttpDelete("{id}")]
+       // [Authorize(Roles = "developer")]
+        [HttpGet("delete/{id}")]
         public async Task<ActionResult<Subject>> DeleteSubject(int id)
         {
             var subject = await _context.Subject.FindAsync(id);
@@ -140,7 +138,8 @@ namespace _8BDAPI.Controllers
             {
                 return NotFound();
             }
-
+            var c = _context.Entry.Where(s => s.subjectId == id).ToList();
+            _context.Entry.RemoveRange(c);
             _context.Subject.Remove(subject);
             await _context.SaveChangesAsync();
 
