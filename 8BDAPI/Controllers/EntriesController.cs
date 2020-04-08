@@ -60,6 +60,20 @@ namespace _8BDAPI.Controllers
 
             return entry;
         }
+            [HttpGet("rownumber/{id}")]
+            public async Task<ActionResult<int>> GetRowNumberByEntryId(int id)
+        {
+            var entry = await _context.Entry.FindAsync(id);
+            var query =$"SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY createDate ASC) AS Row, * FROM entry where subjectId={entry.subjectId}  ) AS Faruk where id={entry.id} ";
+            var blogs =  _context.Entry
+            .FromSqlRaw(query)
+            .ToList();
+            var myResult = _context.Entry.Select((r, i) => new { Row = r, Index = i })
+            .Where(y => y.Row.id == entry.id)
+            .OrderByDescending(x => x.Row.createDate);
+            
+            return 0; 
+        }
        
         //başlıktaki tanım sayısının kaç sayfa oluşturacağı pagination için
         [HttpGet("entrypage/{subjectId}")]
