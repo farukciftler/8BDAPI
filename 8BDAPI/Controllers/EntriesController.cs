@@ -85,6 +85,33 @@ namespace _8BDAPI.Controllers
 
             return entryPage;
         }
+        [HttpPost("edit")]
+        public async Task<ActionResult<Entry>> edit(Entry entry)
+        {
+            var oldentry = _context.Entry.Where(s => s.id == entry.id).FirstOrDefault();
+            oldentry.entry = entry.entry;
+
+            _context.Entry(oldentry).State = EntityState.Modified;
+
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EntryExists(entry.id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return oldentry;
+        }
 
         //başlıktaki tanım sayısı
         [HttpGet("entrynumber/{subjectId}")]
@@ -155,8 +182,8 @@ namespace _8BDAPI.Controllers
         }
 
         // DELETE: api/Entries/5
-        [Authorize(Roles ="developer")]
-        [HttpDelete("{id}")]
+        //[Authorize(Roles ="developer")]
+        [HttpGet("delete/{id}/{reason}")]
         public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason)
         {
             var entry = await _context.Entry.FindAsync(id);
