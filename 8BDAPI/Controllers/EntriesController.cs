@@ -184,10 +184,10 @@ namespace _8BDAPI.Controllers
         // DELETE: api/Entries/5
         //[Authorize(Roles ="developer")]
         [HttpGet("delete/{id}/{reason}")]
-        public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason)
+        public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason="null")
         {
             var entry = await _context.Entry.FindAsync(id);
-            var b = _auth.UserDataByUsername(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            /*var b = _auth.UserDataByUsername(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             //deleted entries to garbage
             GarbageEntry garbage = new GarbageEntry();
             garbage = _mapper.Map<GarbageEntry>(entry);
@@ -197,7 +197,7 @@ namespace _8BDAPI.Controllers
             
           
             _context.GarbageEntry.Add(garbage);
-
+            */
             if (entry == null)
             {
                 return NotFound();

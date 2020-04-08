@@ -472,3 +472,4 @@ D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssem
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.csproj.CoreCompileInputs.cache
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json
+D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json

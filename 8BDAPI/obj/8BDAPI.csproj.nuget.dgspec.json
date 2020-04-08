@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
+    "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
+    "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "projectUniqueName": "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
         "projectName": "8BDAPI",
-        "projectPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
-        "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\obj\\",
+        "projectPath": "D:\\Project\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "packagesPath": "C:\\Users\\faruk.ciftler\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\8BDAPI\\8BDAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\faruk.ciftler\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -103,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

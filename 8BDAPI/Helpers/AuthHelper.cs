@@ -25,5 +25,12 @@ namespace _8BDAPI.Helpers
             return a;
             
         }
+        public User UserDataById(int id)
+        {
+            var a = _context.User.Where(s => (s.id == id))
+            .FirstOrDefault();
+            return a;
+
+        }
     }
 }

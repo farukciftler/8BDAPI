@@ -6,6 +6,6 @@
     "application" : "8bdapi",
     "environment" : "8bdapi-env",
     "iis-website" : "Default Web Site",
-    "app-path"    : ":500",
+    "app-path"    : "/",
     "enable-xray" : false
 }
