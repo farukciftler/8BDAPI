@@ -311,7 +311,6 @@ D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\MailKit.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\MimeKit.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
 D:\Project\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
-D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -471,3 +470,4 @@ C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\staticwe
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.dll
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.pdb
 C:\Users\abdul\Documents\Projects\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.genruntimeconfig.cache
+D:\Project\8BDAPI\8BDAPI\obj\Debug\netcoreapp3.1\8BDAPI.MvcApplicationPartsAssemblyInfo.cache
