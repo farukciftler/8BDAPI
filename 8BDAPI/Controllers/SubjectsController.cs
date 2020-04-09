@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace _8BDAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SubjectsController : ControllerBase
     {

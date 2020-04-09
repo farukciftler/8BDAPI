@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace _8BDAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class VotesController : ControllerBase
     {

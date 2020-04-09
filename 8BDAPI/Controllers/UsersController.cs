@@ -16,7 +16,7 @@ using _8BDAPI.Services;
 namespace _8BDAPI.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -116,7 +116,7 @@ namespace _8BDAPI.Controllers
             user.registerIp = "0000";
             _context.User.Add(user);
             await _context.SaveChangesAsync();
-            _emailSender.Send(user.email, "kayit oldunuz", "tenkyubaby");
+            _emailSender.Send(user.email, "filmcisözlük sizi selam ile karşılar!", "Sözlüğe kayıt olduğunuz için teşekkür ederiz!");
             return CreatedAtAction("GetUser", new { id = user.id }, user);
         }
 

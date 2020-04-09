@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using _8BDAPI.Helpers;
 namespace _8BDAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {

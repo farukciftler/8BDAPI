@@ -10,7 +10,7 @@ using _8BDAPI.Models;
 
 namespace _8BDAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserLevelsController : ControllerBase
     {

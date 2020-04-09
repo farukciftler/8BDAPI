@@ -15,7 +15,7 @@ using _8BDAPI.Helpers.Pagination;
 
 namespace _8BDAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EntriesController : ControllerBase
     {

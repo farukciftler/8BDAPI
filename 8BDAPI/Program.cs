@@ -21,7 +21,6 @@ namespace _8BDAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://locahost:64162");
                 });
     }
 }
