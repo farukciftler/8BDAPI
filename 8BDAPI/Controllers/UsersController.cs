@@ -63,6 +63,24 @@ namespace _8BDAPI.Controllers
         }
 
 
+        //
+        [HttpGet("username/{username}")]
+        public  User GetUserByUsername(string username)
+        {
+
+            var user =  _context.User
+                    .Where(i => i.username == username).FirstOrDefault();
+
+            user.registerIp = null;
+            user.password = null;
+            user.email = null;
+            user.activationToken = null;
+            user.activationTokenValidTime = DateTime.Now;
+            user.lastLoginDate = DateTime.Now;
+
+            return user;
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

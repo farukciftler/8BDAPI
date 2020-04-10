@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abdul\\source\\repos\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
+    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abdul\\source\\repos\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
+    "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abdul\\source\\repos\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "projectUniqueName": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
         "projectName": "8BDAPI",
-        "projectPath": "C:\\Users\\abdul\\source\\repos\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
+        "projectPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\8BDAPI.csproj",
         "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abdul\\source\\repos\\8BDAPI\\8BDAPI\\obj\\publish\\win-x86\\",
+        "outputPath": "C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\obj\\publish\\win-x86\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config",
