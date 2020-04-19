@@ -18,6 +18,7 @@ using System.Text;
 using _8BDAPI.Helpers;
 using AutoMapper;
 using _8BDAPI.Services;
+using Exceptionless;
 
 namespace _8BDAPI
 {
@@ -77,6 +78,7 @@ namespace _8BDAPI
 
             app.UseHttpsRedirection();
 
+            app.UseExceptionless("FERx7htWy1gBQWu27HRhQsks9nAIHfkpycjsClpa");
 
 
             app.UseRouting();

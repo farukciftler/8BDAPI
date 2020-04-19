@@ -11,7 +11,7 @@ using _8BDAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using _8BDAPI.Services;
-
+using MimeKit.Cryptography;
 
 namespace _8BDAPI.Controllers
 {
@@ -80,7 +80,22 @@ namespace _8BDAPI.Controllers
 
             return user;
         }
+        [HttpGet("email/{email}")]
+        public User GetUserByEmail(string email)
+        {
 
+            var user = _context.User
+                    .Where(i => i.email == email).FirstOrDefault();
+
+            user.registerIp = null;
+            user.password = null;
+            user.email = null;
+            user.activationToken = null;
+            user.activationTokenValidTime = DateTime.Now;
+            user.lastLoginDate = DateTime.Now;
+
+            return user;
+        }
         // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -118,6 +133,39 @@ namespace _8BDAPI.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         
+        [HttpPost("recover")]
+        public async Task<ActionResult<User>> RecoverPassword(User usercome)
+        {
+            var user = _context.User
+                    .Where(i => i.email == usercome.email).FirstOrDefault();
+            StringHelper _helper = new StringHelper();
+            user.activationToken = _stringHelper.RandomString(8);
+            user.activationTokenValidTime = DateTime.Now.AddHours(2);
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            var email = $"Sanırım şifrenizi unutmuşsunuz. <br>" +
+                $"Hiç problem değil. Aşağıdaki linke tıklayarak şifrenizi kolayca yenileyebilirsiniz. <br>" +
+                $"Link saadece iki saat geçerlidir. <br>" +
+                $"<a href='filmcisozluk.com/login/recoverypassword/{user.activationToken}/{user.id}'>filmcisozluk.com/login/recoverypassword/{user.activationToken}/{user.id}</a>";
+            _emailSender.Send(user.email, "filmcisözlük şifre yenileme hizmeti", email);
+            return CreatedAtAction("GetUser", new { id = user.id }, user);
+        }
+        [HttpPost("newpassword")]
+        public async Task<ActionResult<User>> NewPassword(User usercome)
+        {
+            StringHelper _helper = new StringHelper();
+            var user = _context.User
+                    .Where(i => i.id == usercome.id && i.activationToken == usercome.activationToken)
+                    .FirstOrDefault();
+            if(DateTime.Now<user.activationTokenValidTime)
+            {
+                user.password = _helper.CalculateMD5Hash(usercome.password);
+                _context.Entry(user).State = EntityState.Modified;
+            }
+
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetUser", new { id = user.id }, user);
+        }
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
@@ -128,7 +176,7 @@ namespace _8BDAPI.Controllers
             user.password = _helper.CalculateMD5Hash(user.password);
             user.lastLoginDate = DateTime.Now;
             user.registerDate = DateTime.Now;
-            user.userLevel = 9; //now everyone developer
+            user.userLevel = 6; //now everyone author
             user.isActive = 0;
             user.isApproved = 0;
             user.registerIp = "0000";
@@ -138,8 +186,9 @@ namespace _8BDAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.id }, user);
         }
 
+
         // DELETE: api/Users/5
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {

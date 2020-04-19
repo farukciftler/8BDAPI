@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace _8BDAPI.Controllers
 {
@@ -23,7 +22,6 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Votes
-        [Authorize(Roles ="developer")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vote>>> GetVote()
         {
@@ -31,7 +29,6 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Votes/5
-        [Authorize(Roles ="developer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Vote>> GetVote(int id)
         {
@@ -48,7 +45,6 @@ namespace _8BDAPI.Controllers
         // PUT: api/Votes/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize(Roles ="developer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVote(int id, Vote vote)
         {
@@ -81,19 +77,78 @@ namespace _8BDAPI.Controllers
         // POST: api/Votes
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize(Roles ="developer")]
         [HttpPost]
         public async Task<ActionResult<Vote>> PostVote(Vote vote)
         {
-            vote.voteDate = DateTime.Now;
             _context.Vote.Add(vote);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetVote", new { id = vote.id }, vote);
         }
 
+        [HttpPost("likevote")]
+        public async Task<ActionResult<int>> LikeVote(Vote vote)
+        {
+            
+            var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).Count();
+            if(likesame == 0 )
+            {
+            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).Count();
+            if(unlikesame>0)
+                {
+                    var c = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).ToList();
+                    _context.Vote.RemoveRange(c);
+
+                    
+                }
+                _context.Vote.Add(vote);
+                await _context.SaveChangesAsync();
+            }
+
+            var count = _context.Vote.Where(s => s.type == 1).Count();
+
+            return count;
+        }
+
+        [HttpPost("unlikevote")]
+        public async Task<ActionResult<int>> UnLikeVote(Vote vote)
+        {
+            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).Count();
+            if (unlikesame == 0)
+            {
+                var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).Count();
+                if (likesame > 0)
+                {
+                    var c = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).ToList();
+                    _context.Vote.RemoveRange(c);
+
+                }
+                _context.Vote.Add(vote);
+
+                await _context.SaveChangesAsync();
+            }
+
+            var count = _context.Vote.Where(s => s.type == 0).Count();
+
+            return count;
+        }
+        [HttpGet("countlike/{id}")]
+        public ActionResult<int> CountLike(int id)
+        {
+            var count = _context.Vote.Where(s => s.type == 1 && s.entryId == id).Count();
+
+            return count;
+        }
+
+        [HttpGet("countunlike/{id}")]
+        public  ActionResult<int> CountUnlike(int id)
+        {
+            var count =  _context.Vote.Where(s => s.type == 0 && s.entryId == id).Count();
+
+            return count;
+        }
+
         // DELETE: api/Votes/5
-        [Authorize(Roles ="developer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Vote>> DeleteVote(int id)
         {
@@ -108,6 +163,8 @@ namespace _8BDAPI.Controllers
 
             return vote;
         }
+
+
 
         private bool VoteExists(int id)
         {

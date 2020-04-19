@@ -1174,7 +1174,7 @@ bu işlemin davranışını düzenleyebilirsiniz. Bununla ilgili daha fazla bilg
   </ItemGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="_8BDAPIContext">
-      <Value>Server=farukciftler.csnrb0wicqrm.us-east-2.rds.amazonaws.com%3bDatabase=8BDAPI%3bUser ID=farukciftler%3bPassword=Fc147258</Value>
+      <Value>Server=mssql04.turhost.com%3bDatabase=filmciso_api%3bUser ID=farukciftler%3bPassword=Ahguzelcocuk1998!</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

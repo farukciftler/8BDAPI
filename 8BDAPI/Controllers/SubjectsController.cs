@@ -31,8 +31,10 @@ namespace _8BDAPI.Controllers
         {
             var query = _context.Subject.OrderByDescending(x => x.updateDate);
 
+  
             var subject = new PagedList<Subject>(query, pageIndex, pageSize);
             
+
             return subject;
         }
 
@@ -50,7 +52,15 @@ namespace _8BDAPI.Controllers
 
             return subject;
         }
-        
+
+        [HttpGet("count/{id}")]
+        public  int GetSubjectCount(int id)
+        {
+            var subject =  _context.Entry.Where(i=> i.subjectId == id).Count();
+
+            return subject;
+        }
+
         [HttpGet("title/{subjecto}")]
         public ActionResult<Subject> GetSubjectByName(string subjecto)
         {
@@ -111,10 +121,11 @@ namespace _8BDAPI.Controllers
         // POST: api/Subjects
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize(Roles = "developer")]
+        [Authorize(Roles = "author, moderator, administrator, developer")]
         [HttpPost]
         public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
+            subject.subject = subject.subject.ToLower();
             string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = _context.User.Where(s => s.username == username).FirstOrDefault();
             subject.authorId = user.id;

@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="api.filmcisozluk.com" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\abdul\\Documents\\Projects\\8BDAPI\\8BDAPI\\obj\\Release\\netcoreapp3\.0\\win-x86\\PubTmp\\Out\\$" />
-  </parameter>
-</parameters>

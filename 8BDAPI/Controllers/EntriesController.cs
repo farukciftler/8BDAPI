@@ -38,9 +38,10 @@ namespace _8BDAPI.Controllers
     
         public  virtual IPagedList<Entry> Index(int subjectId = 1,int pageIndex = 0, int pageSize = 10)
         {
+            
             var query = _context.Entry
                    .Where(i => i.subjectId == subjectId);
-
+            
             var entry = new PagedList<Entry>(query, pageIndex, pageSize);
             return  entry;
         }
@@ -160,7 +161,7 @@ namespace _8BDAPI.Controllers
         // POST: api/Entries
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize(Roles ="developer")]
+        [Authorize(Roles ="author, moderator, administrator, developer")]
         [HttpPost]
         public async Task<ActionResult<Entry>> PostEntry(Entry entry)
         {
@@ -170,7 +171,7 @@ namespace _8BDAPI.Controllers
 
             var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
-            list2.updateDate = DateTime.Now;
+                list2.updateDate = DateTime.Now;
             _context.Subject.Update(list2);
             entry.createDate = DateTime.Now;
             entry.lastUpdateDate = DateTime.Now;
