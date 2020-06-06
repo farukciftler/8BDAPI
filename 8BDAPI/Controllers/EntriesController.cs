@@ -186,28 +186,31 @@ namespace _8BDAPI.Controllers
         // DELETE: api/Entries/5
         //[Authorize(Roles ="developer")]
         [HttpGet("delete/{id}/{reason}")]
-        public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason="null")
+        public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason="test")
         {
-            var entry = await _context.Entry.FindAsync(id);
-            
-            //deleted entries to garbage
-            GarbageEntry garbage = new GarbageEntry();
-            garbage = _mapper.Map<GarbageEntry>(entry);
-            garbage.deletedFor = reason;
-            garbage.deletedDate = DateTime.Now;
 
-           
-            
-            
-          
-            _context.GarbageEntry.Add(garbage);
+            var entry = await _context.Entry.FindAsync(id);
+        
+
             
             if (entry == null)
             {
                 return NotFound();
             }
+
+            //deleted entries to garbage
+            GarbageEntry garbage = new GarbageEntry();
+            garbage = _mapper.Map<GarbageEntry>(entry);
+            garbage.deletedFor = reason;
+            garbage.deletedDate = DateTime.Now;
+            _context.GarbageEntry.Add(garbage);
+
+            //entry delete
             _context.Entry.Remove(entry);
-            await _context.SaveChangesAsync();
+
+
+           
+            
             //delete yapılınca başlıktaki updatedate'i tekrar eski tarihe çek yapıldı
             if (_context.Entry.Where(s => (s.subjectId == entry.subjectId))
             .OrderByDescending(e => e.createDate).FirstOrDefault() != null)
@@ -225,7 +228,7 @@ namespace _8BDAPI.Controllers
                 _context.Subject.Remove(subject);
                 
             }
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return entry;
         }
 
