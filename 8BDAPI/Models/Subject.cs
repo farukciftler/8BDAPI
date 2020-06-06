@@ -14,5 +14,6 @@ namespace _8BDAPI.Models
         public DateTime createDate { get; set; }
         public DateTime updateDate { get; set; }
         public string BSHIU { get; set; } //BOLD STEADY HIDE ITALIC UNDERLINED
+        public int totalCount { get; set; }
     }
 }

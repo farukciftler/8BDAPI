@@ -37,6 +37,24 @@ namespace _8BDAPI.Controllers
 
             return subject;
         }
+        [HttpGet("subjectcount")]
+        public void SubjectCount()
+        {
+            var subjectcount = _context.Subject.Select(p => p.id).ToList();
+            for (int i = 0; i < subjectcount.Count(); i++)
+            {
+                var subject = _context.Subject.Find(subjectcount[i]);
+                var totalcount = _context.Entry.Where(p => p.subjectId == subject.id).Count();
+                subject.totalCount = totalcount;
+                _context.Entry(subject).State = EntityState.Modified;
+                 
+            }
+            _context.SaveChanges();
+
+
+
+
+        }
 
         // GET: api/Subjects/5
         [Authorize(Roles = "developer")]

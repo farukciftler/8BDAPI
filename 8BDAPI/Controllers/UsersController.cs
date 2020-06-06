@@ -70,14 +70,15 @@ namespace _8BDAPI.Controllers
 
             var user =  _context.User
                     .Where(i => i.username == username).FirstOrDefault();
-
+            if(user != null)
+            { 
             user.registerIp = null;
             user.password = null;
             user.email = null;
             user.activationToken = null;
             user.activationTokenValidTime = DateTime.Now;
             user.lastLoginDate = DateTime.Now;
-
+            }
             return user;
         }
         [HttpGet("email/{email}")]
@@ -86,13 +87,15 @@ namespace _8BDAPI.Controllers
 
             var user = _context.User
                     .Where(i => i.email == email).FirstOrDefault();
-
+            if(user != null)
+            { 
             user.registerIp = null;
             user.password = null;
             user.email = null;
             user.activationToken = null;
             user.activationTokenValidTime = DateTime.Now;
             user.lastLoginDate = DateTime.Now;
+            }
 
             return user;
         }
@@ -166,7 +169,7 @@ namespace _8BDAPI.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetUser", new { id = user.id }, user);
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
 

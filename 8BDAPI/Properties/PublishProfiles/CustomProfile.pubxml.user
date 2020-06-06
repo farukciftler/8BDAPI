@@ -6,7 +6,7 @@ bu işlemin davranışını düzenleyebilirsiniz. Bununla ilgili daha fazla bilg
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAry2Tf15hVEW5Fa5EEi94QAAAAAACAAAAAAAQZgAAAAEAACAAAADmFAnLyzDRYOOBz756GbiqZtpVGuR9dyRwsN+GxPIUhQAAAAAOgAAAAAIAACAAAADnmRDnRfIovbo/3FrQPiwUXhuRK5z4BZ3zo7CzdMuQvDAAAABrXXptdgaXiwXZvzEsH5MEVP9kx7/0oTkQDPJ5WSutQqQgF2m1m46zhtj5NK9BlC9AAAAAuvpnE1VV6xspC9n1tHRrVjb6QidkZLyvLz0kUZzta0qSNNHpEh6Ne6le2FePrzlyCkwu9QpGDHjDWmaOAGcobg==</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXpjXXdMeG06z+almP7A5vgAAAAACAAAAAAAQZgAAAAEAACAAAAC0bVoklbTIWDrQn5z/7ejuYMmkYkyb2u6kKWz8kkbC/QAAAAAOgAAAAAIAACAAAACeh5eGVGHb0ihq/ToXnGEzH40xZdP1L75+f1epCM4rpzAAAADKh52AyaDsi36NCLa5hJb2FvDjMEYpcE9aSf0cdB2r6cdDEk53FqzL9R6efNoE5YtAAAAADQBn2wcFniJx71rhGAoP1vtZr5sU0mX1s6Idxhc1W8bBq2dwgcjVaqcHVd9LUA/8TRduwharEdWVJO7wpGwPKQ==</EncryptedPassword>
     <_PublishTargetUrl>ftp://filmcisozluk.com/httpdocs/api</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
@@ -1174,7 +1174,7 @@ bu işlemin davranışını düzenleyebilirsiniz. Bununla ilgili daha fazla bilg
   </ItemGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="_8BDAPIContext">
-      <Value>Server=mssql04.turhost.com%3bDatabase=filmciso_api%3bUser ID=farukciftler%3bPassword=Ahguzelcocuk1998!</Value>
+      <Value>Server=mssql04.turhost.com%3bDatabase=filmciso_api%3bUser ID=farukciftler%3bPassword=Ahguzelcocuk1998_</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

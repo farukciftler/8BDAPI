@@ -172,6 +172,7 @@ namespace _8BDAPI.Controllers
             var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
             //eski başlığa yeni tanım girildiğnde updateDate güncellemesi
                 list2.updateDate = DateTime.Now;
+            list2.totalCount = list2.totalCount + 1;
             _context.Subject.Update(list2);
             entry.createDate = DateTime.Now;
             entry.lastUpdateDate = DateTime.Now;
@@ -188,17 +189,19 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<Entry>> DeleteEntry(int id, string reason="null")
         {
             var entry = await _context.Entry.FindAsync(id);
-            /*var b = _auth.UserDataByUsername(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            
             //deleted entries to garbage
             GarbageEntry garbage = new GarbageEntry();
             garbage = _mapper.Map<GarbageEntry>(entry);
+            garbage.deletedFor = reason;
             garbage.deletedDate = DateTime.Now;
-            garbage.deletedById = b.id;
+
+           
             
             
           
             _context.GarbageEntry.Add(garbage);
-            */
+            
             if (entry == null)
             {
                 return NotFound();
@@ -213,6 +216,7 @@ namespace _8BDAPI.Controllers
             .OrderByDescending(e => e.createDate).FirstOrDefault();
                 var list2 = _context.Subject.Where(s => s.id == entry.subjectId).FirstOrDefault();
                 list2.updateDate = list.createDate;
+                list2.totalCount = list2.totalCount - 1;
                 _context.Subject.Update(list2);
             }
             else

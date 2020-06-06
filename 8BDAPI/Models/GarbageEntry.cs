@@ -17,7 +17,6 @@ namespace _8BDAPI.Models
         public DateTime lastUpdateDate { get; set; }
         public DateTime deletedDate { get; set; }
         public string deletedFor { get; set; }
-        public int deletedById { get; set; }
 
     }
 }
