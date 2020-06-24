@@ -25,5 +25,7 @@ namespace _8BDAPI.Data
         public DbSet<_8BDAPI.Models.User> User { get; set; }
 
         public DbSet<_8BDAPI.Models.UserLevel> UserLevel { get; set; }
+
+        public DbSet<_8BDAPI.Models.EntryNotice> EntryNotice { get; set; }
     }
 }

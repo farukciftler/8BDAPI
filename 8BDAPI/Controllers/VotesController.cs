@@ -90,13 +90,13 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<int>> LikeVote(Vote vote)
         {
             
-            var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).Count();
+            var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId && vote.entryId == s.entryId).Count();
             if(likesame == 0 )
             {
-            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).Count();
+            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId && vote.entryId == s.entryId).Count();
             if(unlikesame>0)
                 {
-                    var c = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).ToList();
+                    var c = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
                     _context.Vote.RemoveRange(c);
 
                     
@@ -105,7 +105,7 @@ namespace _8BDAPI.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            var count = _context.Vote.Where(s => s.type == 1).Count();
+            var count = _context.Vote.Where(s => s.type == 1 && vote.entryId == s.entryId).Count();
 
             return count;
         }
@@ -113,13 +113,13 @@ namespace _8BDAPI.Controllers
         [HttpPost("unlikevote")]
         public async Task<ActionResult<int>> UnLikeVote(Vote vote)
         {
-            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId).Count();
+            var unlikesame = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId && vote.entryId == s.entryId).Count();
             if (unlikesame == 0)
             {
-                var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).Count();
+                var likesame = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId && vote.entryId ==s.entryId).Count();
                 if (likesame > 0)
                 {
-                    var c = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId).ToList();
+                    var c = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
                     _context.Vote.RemoveRange(c);
 
                 }
@@ -128,7 +128,7 @@ namespace _8BDAPI.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            var count = _context.Vote.Where(s => s.type == 0).Count();
+            var count = _context.Vote.Where(s => s.type == 0 && vote.entryId == s.entryId).Count();
 
             return count;
         }

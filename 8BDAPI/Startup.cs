@@ -60,7 +60,7 @@ namespace _8BDAPI
                 });
             services.AddMvc();
             services.AddDbContext<_8BDAPIContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
             services.AddScoped<UserLevelHelper>();
             services.AddScoped<AuthHelper>();
             services.AddScoped<StringHelper>(); 
