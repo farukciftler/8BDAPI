@@ -26,6 +26,7 @@ namespace _8BDAPI.Controllers
         public async Task<ActionResult<IEnumerable<EntryNotice>>> GetEntryNotice()
         {
             return await _context.EntryNotice.ToListAsync();
+            
         }
 
         // GET: api/EntryNotices/5

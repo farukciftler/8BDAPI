@@ -62,6 +62,7 @@ namespace _8BDAPI
             services.AddDbContext<_8BDAPIContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("_8BDAPIContext")));
             services.AddScoped<UserLevelHelper>();
+            services.AddScoped<CommonHelper>();
             services.AddScoped<AuthHelper>();
             services.AddScoped<StringHelper>(); 
             services.AddScoped<IEmailSender, EmailSender>();

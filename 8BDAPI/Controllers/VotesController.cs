@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using _8BDAPI.Data;
 using _8BDAPI.Models;
+using _8BDAPI.Helpers;
 
 namespace _8BDAPI.Controllers
 {
@@ -15,10 +16,13 @@ namespace _8BDAPI.Controllers
     public class VotesController : ControllerBase
     {
         private readonly _8BDAPIContext _context;
+        private readonly CommonHelper _common;
 
-        public VotesController(_8BDAPIContext context)
+
+        public VotesController(_8BDAPIContext context, CommonHelper common)
         {
             _context = context;
+            _common = common;
         }
 
         // GET: api/Votes
@@ -101,7 +105,14 @@ namespace _8BDAPI.Controllers
 
                     
                 }
+                vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
                 _context.Vote.Add(vote);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var c = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
+                _context.Vote.RemoveRange(c);
                 await _context.SaveChangesAsync();
             }
 
@@ -123,12 +134,41 @@ namespace _8BDAPI.Controllers
                     _context.Vote.RemoveRange(c);
 
                 }
+                vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
                 _context.Vote.Add(vote);
 
                 await _context.SaveChangesAsync();
             }
+            else
+            {
+                var c = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
+                _context.Vote.RemoveRange(c);
+                await _context.SaveChangesAsync();
+            }
 
             var count = _context.Vote.Where(s => s.type == 0 && vote.entryId == s.entryId).Count();
+
+            return count;
+        }
+
+        [HttpPost("favoritevote")]
+        public async Task<ActionResult<int>> Favorite(Vote vote)
+        {
+            var favoritesame = _context.Vote.Where(s => s.type == 2 && s.userId == vote.userId && vote.entryId == s.entryId).Count();
+            if (favoritesame == 0)
+            {
+                vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
+                _context.Vote.Add(vote);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                var c = _context.Vote.Where(s => s.type == 2 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
+                _context.Vote.RemoveRange(c);
+                await _context.SaveChangesAsync();
+            }
+
+            var count = _context.Vote.Where(s => s.type == 2 && vote.entryId == s.entryId).Count();
 
             return count;
         }
@@ -147,7 +187,13 @@ namespace _8BDAPI.Controllers
 
             return count;
         }
+        [HttpGet("countfavorite/{id}")]
+        public ActionResult<int> CountFavorite(int id)
+        {
+            var count = _context.Vote.Where(s => s.type == 2 && s.entryId == id).Count();
 
+            return count;
+        }
         // DELETE: api/Votes/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Vote>> DeleteVote(int id)
