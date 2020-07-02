@@ -22,5 +22,10 @@ namespace _8BDAPI.Helpers
             var userid = c.authorId;
             return userid;
         }
+        public bool IsNumeric( string s)
+        {
+            float output;
+            return float.TryParse(s, out output);
+        }
     }
 }

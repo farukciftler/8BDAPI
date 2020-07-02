@@ -25,13 +25,15 @@ namespace _8BDAPI.Controllers
         private readonly AuthHelper _auth;
         private IEmailSender _emailSender;
         private StringHelper _stringHelper;
-        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth, IEmailSender emailSender, StringHelper stringHelper)
+        private CommonHelper _common;
+        public UsersController(_8BDAPIContext context, UserLevelHelper usr, AuthHelper auth, IEmailSender emailSender, StringHelper stringHelper, CommonHelper common)
         {
             _context = context;
             _usr = usr;
             _auth = auth;
             _emailSender = emailSender;
             _stringHelper = stringHelper;
+            _common = common;
         }
 
             
@@ -47,7 +49,7 @@ namespace _8BDAPI.Controllers
         }
 
         // GET: api/Users/5
-        [Authorize(Roles = "developer")]
+        //[Authorize(Roles = "developer")]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -58,6 +60,12 @@ namespace _8BDAPI.Controllers
             {
                 return NotFound();
             }
+            user.registerIp = "";
+            user.password = "";
+            user.email = "";
+            user.activationToken = "";
+            user.activationTokenValidTime = DateTime.Now;
+            user.lastLoginDate = DateTime.Now;
 
             return user;
         }
@@ -68,17 +76,29 @@ namespace _8BDAPI.Controllers
         public  User GetUserByUsername(string username)
         {
 
-            var user =  _context.User
-                    .Where(i => i.username == username).FirstOrDefault();
-            if(user != null)
-            { 
-            user.registerIp = null;
-            user.password = null;
-            user.email = null;
-            user.activationToken = null;
-            user.activationTokenValidTime = DateTime.Now;
-            user.lastLoginDate = DateTime.Now;
+            User user = new User();
+            user = _context.User
+                         .Where(i => i.username == username).FirstOrDefault();
+            
+            if ( true == _common.IsNumeric(username))
+            {
+                int userid = Convert.ToInt32(username);
+                 user = _context.User
+                         .Where(i => i.username == username).FirstOrDefault();
             }
+            
+            if (user != null)
+            {
+                user.registerIp = "";
+                user.password = "";
+                user.email = "";
+                user.activationToken = "";
+                user.activationTokenValidTime = DateTime.Now;
+                user.lastLoginDate = DateTime.Now;
+            }
+
+
+
             return user;
         }
         [HttpGet("email/{email}")]

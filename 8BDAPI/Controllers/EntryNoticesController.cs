@@ -78,7 +78,7 @@ namespace _8BDAPI.Controllers
         // POST: api/EntryNotices
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        [HttpPost("notice")]
         public async Task<ActionResult<EntryNotice>> PostEntryNotice(EntryNotice entryNotice)
         {
             _context.EntryNotice.Add(entryNotice);

@@ -12,5 +12,12 @@ namespace _8BDAPI.Models
         public int noticedById { get; set; }
         public string notice { get; set; }
         public DateTime createdOnUtc { get; set; }
+
+        public EntryNotice()
+        {
+            notice = "";
+            createdOnUtc = DateTime.Now;
+        }
+
     }
 }
