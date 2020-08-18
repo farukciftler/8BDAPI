@@ -45,8 +45,49 @@ namespace _8BDAPI.Controllers
             var entry = new PagedList<Entry>(query, pageIndex, pageSize);
             return  entry;
         }
+        [HttpGet("allentries")]
+        public virtual IPagedList<Entry> AuthorEntries(int authorId, int pageIndex = 0, int pageSize = 10)
+        {
 
-     
+            var query = _context.Entry
+                   .Where(i =>i.authorId == authorId ).OrderByDescending(s=>s.createDate);
+
+            var entry = new PagedList<Entry>(query, pageIndex, pageSize);
+            return entry;
+        }
+        [HttpGet("mostlikedentries")]
+        public virtual IPagedList<Entry> AuthorMostLikedEntries(int authorId, int pageIndex = 0, int pageSize = 10)
+        {
+
+            var query = _context.Entry
+                   .Where(i => i.authorId == authorId && i.entryLike>0                                                  ).OrderByDescending(s => s.entryLike);
+
+            var entry = new PagedList<Entry>(query, pageIndex, pageSize);
+            return entry;
+        }
+
+        [HttpGet("mostunlikedentries")]
+        public virtual IPagedList<Entry> AuthorMostUnlikedEntries(int authorId, int pageIndex = 0, int pageSize = 10)
+        {
+
+            var query = _context.Entry
+                   .Where(i => i.authorId == authorId && i.entryUnlike > 0).OrderByDescending(s => s.entryUnlike);
+
+            var entry = new PagedList<Entry>(query, pageIndex, pageSize);
+            return entry;
+        }
+        [HttpGet("mostfavoritedentries")]
+        public virtual IPagedList<Entry> AuthorMostFavoritedEntries(int authorId, int pageIndex = 0, int pageSize = 10)
+        {
+
+            var query = _context.Entry
+                   .Where(i => i.authorId == authorId && i.entryFavorite > 0).OrderByDescending(s => s.entryFavorite);
+
+            var entry = new PagedList<Entry>(query, pageIndex, pageSize);
+            return entry;
+        }
+
+
         // GET: api/Entries/5
 
         [HttpGet("{id}")]
@@ -61,7 +102,16 @@ namespace _8BDAPI.Controllers
 
             return entry;
         }
-            [HttpGet("rownumber/{id}")]
+
+        [HttpGet("entrycount/{id}")]
+        public  int GetUserId(int id)
+        {
+            var entry = _context.Entry.Where(s => s.authorId == id).Count();
+            return entry;
+        }
+
+
+        [HttpGet("rownumber/{id}")]
             public async Task<ActionResult<int>> GetRowNumberByEntryId(int id)
         {
             var entry = await _context.Entry.FindAsync(id);
@@ -83,6 +133,45 @@ namespace _8BDAPI.Controllers
             var entryPage = _context.Entry.Where(x => x.subjectId == subjectId).Count();
             entryPage = (entryPage / 10) + 1; 
             
+
+            return entryPage;
+        }
+
+        [HttpGet("allentriesentrypage/{authorId}")]
+        public int AllEntriesEntryPage(int authorId)
+        {
+            var entryPage = _context.Entry.Where(x => x.authorId == authorId).Count();
+            entryPage = (entryPage / 10) + 1;
+
+
+            return entryPage;
+        }
+
+        [HttpGet("mostlikedentriesentrypage/{authorId}")]
+        public int MostLikedEntryPage(int authorId)
+        {
+            var entryPage = _context.Entry.Where(x => x.authorId == authorId  && x.entryLike>0).Count();
+            entryPage = (entryPage / 10) + 1;
+
+
+            return entryPage;
+        }
+
+        [HttpGet("mostunlikedentriesentrypage/{authorId}")]
+        public int MostUnlikedEntryPage(int authorId)
+        {
+            var entryPage = _context.Entry.Where(x => x.authorId == authorId && x.entryUnlike > 0).Count();
+            entryPage = (entryPage / 10) + 1;
+
+
+            return entryPage;
+        }
+        [HttpGet("mostfavoritedentriesentrypage/{authorId}")]
+        public int MostFavoritedEntryPage(int authorId)
+        {
+            var entryPage = _context.Entry.Where(x => x.authorId == authorId && x.entryFavorite > 0).Count();
+            entryPage = (entryPage / 10) + 1;
+
 
             return entryPage;
         }
@@ -236,6 +325,43 @@ namespace _8BDAPI.Controllers
         {
             return _context.Entry.Any(e => e.id == id);
         }
-       
+
+        [HttpGet("entrylikecount")]
+        public  void EntryLikeCount()
+        {
+            var entrycount = _context.Entry.ToList();
+            foreach (var item in entrycount)
+            {
+                var totalcount = _context.Vote.Where(p => p.entryId == item.id && p.type == 1).Count();
+                item.entryLike = totalcount;
+                _context.Entry(item).State = EntityState.Modified;
+            }
+            _context.SaveChanges();
+        }
+        [HttpGet("entryunlikecount")]
+        public void EntryUnlikeCount()
+        {
+            var entrycount = _context.Entry.ToList();
+            foreach (var item in entrycount)
+            {
+                var totalcount = _context.Vote.Where(p => p.entryId == item.id && p.type == 0).Count();
+                item.entryUnlike = totalcount;
+                _context.Entry(item).State = EntityState.Modified;
+            }
+            _context.SaveChanges();
+        }
+        [HttpGet("entryfavoritecount")]
+        public void EntryFavoriteCount()
+        {
+            var entrycount = _context.Entry.ToList();
+            foreach (var item in entrycount)
+            {
+                var totalcount = _context.Vote.Where(p => p.entryId == item.id && p.type == 2).Count();
+                item.entryFavorite = totalcount;
+                _context.Entry(item).State = EntityState.Modified;
+            }
+            _context.SaveChanges();
+        }
+
     }
 }

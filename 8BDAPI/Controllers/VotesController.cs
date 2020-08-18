@@ -107,10 +107,20 @@ namespace _8BDAPI.Controllers
                 }
                 vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
                 _context.Vote.Add(vote);
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                entry.entryLike = entry.entryLike + 1;
+                if (entry.entryUnlike != 0)
+                {
+                    entry.entryUnlike = entry.entryUnlike - 1;
+                }
+                _context.Entry(entry).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
             else
             {
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                entry.entryLike = entry.entryLike - 1;
+                _context.Entry(entry).State = EntityState.Modified;
                 var c = _context.Vote.Where(s => s.type == 1 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
                 _context.Vote.RemoveRange(c);
                 await _context.SaveChangesAsync();
@@ -135,12 +145,24 @@ namespace _8BDAPI.Controllers
 
                 }
                 vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                if (entry.entryLike != 0)
+                {
+                    entry.entryLike = entry.entryLike - 1;
+                }
+                entry.entryUnlike = entry.entryUnlike + 1;
+                _context.Entry(entry).State = EntityState.Modified;
+
                 _context.Vote.Add(vote);
 
                 await _context.SaveChangesAsync();
             }
             else
             {
+
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                entry.entryUnlike = entry.entryUnlike - 1;
+                _context.Entry(entry).State = EntityState.Modified;
                 var c = _context.Vote.Where(s => s.type == 0 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
                 _context.Vote.RemoveRange(c);
                 await _context.SaveChangesAsync();
@@ -159,12 +181,21 @@ namespace _8BDAPI.Controllers
             {
                 vote.authorId = _common.GetUserIdByEntryId(vote.entryId);
                 _context.Vote.Add(vote);
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                entry.entryFavorite = entry.entryFavorite + 1;
+                _context.Entry(entry).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
             else
             {
                 var c = _context.Vote.Where(s => s.type == 2 && s.userId == vote.userId && vote.entryId == s.entryId).ToList();
                 _context.Vote.RemoveRange(c);
+                var entry = _context.Entry.Where(p => p.id == vote.entryId).FirstOrDefault();
+                if (entry.entryFavorite !=0)
+                {
+                    entry.entryFavorite = entry.entryFavorite - 1;
+                }
+                _context.Entry(entry).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
 

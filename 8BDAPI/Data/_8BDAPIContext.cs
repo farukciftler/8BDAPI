@@ -28,5 +28,7 @@ namespace _8BDAPI.Data
         public DbSet<_8BDAPI.Models.EntryNotice> EntryNotice { get; set; }
 
         public DbSet<_8BDAPI.Models.Announcement> Announcement { get; set; }
+
+        public DbSet<_8BDAPI.Models.Message> Message { get; set; }
     }
 }

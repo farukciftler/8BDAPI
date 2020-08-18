@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace _8BDAPI.Controllers
 {
-    [Route("[controller]")]
+     [Route("[controller]")]
     [ApiController]
     public class SubjectsController : ControllerBase
     {
@@ -26,6 +26,8 @@ namespace _8BDAPI.Controllers
         
         // GET: api/Subjects
       
+        
+
         [HttpGet]
         public virtual IPagedList<Subject> GetSubject(int pageIndex = 0, int pageSize = int.MaxValue)
         {
@@ -36,6 +38,13 @@ namespace _8BDAPI.Controllers
             
 
             return subject;
+        }
+
+        [HttpGet("subjectnumber/{id}")]
+        public int GetUserId(int id)
+        {
+            var entry = _context.Subject.Where(s => s.authorId == id).Count();
+            return entry;
         }
         [HttpGet("subjectcount")]
         public void SubjectCount()
@@ -50,10 +59,6 @@ namespace _8BDAPI.Controllers
                  
             }
             _context.SaveChanges();
-
-
-
-
         }
 
         // GET: api/Subjects/5

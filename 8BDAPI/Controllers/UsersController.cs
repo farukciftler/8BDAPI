@@ -69,6 +69,18 @@ namespace _8BDAPI.Controllers
 
             return user;
         }
+        [HttpGet("lastloginupdate/{id}")]
+        public  User lastloginupdate(int id)
+        {
+
+            var user =  _context.User.Find(id);
+
+            user.lastLoginDate = DateTime.Now;
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return user;
+        }
 
 
         //
@@ -84,7 +96,7 @@ namespace _8BDAPI.Controllers
             {
                 int userid = Convert.ToInt32(username);
                  user = _context.User
-                         .Where(i => i.username == username).FirstOrDefault();
+                         .Where(i => i.id == userid).FirstOrDefault();
             }
             
             if (user != null)
@@ -100,6 +112,38 @@ namespace _8BDAPI.Controllers
 
 
             return user;
+        }
+
+
+
+        [HttpGet("usernametoid/{username}")]
+        public int GetUserIdByUsername(string username)
+        {
+
+            User user = new User();
+            user = _context.User
+                         .Where(i => i.username == username).FirstOrDefault();
+
+            if (true == _common.IsNumeric(username))
+            {
+                int userid = Convert.ToInt32(username);
+                user = _context.User
+                        .Where(i => i.username == username).FirstOrDefault();
+            }
+
+            if (user != null)
+            {
+                user.registerIp = "";
+                user.password = "";
+                user.email = "";
+                user.activationToken = "";
+                user.activationTokenValidTime = DateTime.Now;
+                user.lastLoginDate = DateTime.Now;
+            }
+
+
+
+            return user.id;
         }
         [HttpGet("email/{email}")]
         public User GetUserByEmail(string email)
@@ -226,6 +270,7 @@ namespace _8BDAPI.Controllers
 
             return user;
         }
+
 
         private bool UserExists(int id)
         {
